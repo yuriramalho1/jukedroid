@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="voltar()" color="botaoVoltar">Voltar</button>
+    </ion-buttons>
+    <ion-title>Cambistas do Gerente</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <h3>Gerente: {{resumoGerente.usuario.nome}}</h3>
+
+  <ion-grid>
+    <ion-row class="aposta-row" style="font-size: 13px;">
+      <ion-col col-4 class="aposta-title"><ion-label>Entrada</ion-label></ion-col>
+      <ion-col col-4 class="aposta-title"><ion-label>Saída</ion-label></ion-col>
+      <ion-col col-4 class="aposta-title"><ion-label>Comissão</ion-label></ion-col>
+    </ion-row>
+    <ion-row class="aposta-row cardCambista" *ngFor="let resumoCambista of resumoGerente.resumoCambistas">
+      <ion-col col-12 class="aposta-description">{{resumoCambista.usuario.nome}}</ion-col>
+      <ion-col col-4 class="aposta-description">{{resumoCambista.totalGeralEntrada || 0 | currency : 'BRL'}}</ion-col>
+      <ion-col col-4 class="aposta-description">{{resumoCambista.totalSaida || 0 | currency : 'BRL'}}</ion-col>
+      <ion-col col-4 class="aposta-description" (click)="detalhaCambista(resumoCambista)"  style="color: #4a8bfc">{{resumoCambista.totalComissao || 0 | currency : 'BRL'}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

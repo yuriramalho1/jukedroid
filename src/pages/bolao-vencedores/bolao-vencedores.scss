@@ -1,0 +1,20 @@
+page-bolao-vencedores {
+  ion-list{
+    font-weight: bold;
+  }
+
+  ion-grid,
+  ion-card-content{
+    padding: 0 !important;
+  }
+
+  .colunaVencedor{
+    padding-bottom: 0;
+  }
+
+  .colunaVencedor span,
+  .idBilhete span{
+    text-align: left;
+    display: block;
+  }
+}

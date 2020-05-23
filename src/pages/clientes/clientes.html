@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle *ngIf="!isModal">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons start *ngIf="isModal">
+      <button ion-button (click)="voltar()" color="light">Voltar</button>
+    </ion-buttons>
+    <ion-title>Meus Clientes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button (click)="showModal(u, 'CADASTRO')" icon-left color="primary" class="aposta-button">
+          <ion-icon name="add-circle"></ion-icon>Novo Cliente</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button (click)="selectClientes()" icon-left color="primary" class="aposta-button">
+          <ion-icon name="checkmark-circle"></ion-icon>Adicionar Cliente
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-searchbar placeholder="Nome do Cliente" (ionInput)="filterItems($event)"></ion-searchbar>
+
+  <ion-card *ngFor="let u of listaClientes">
+    <ion-card-content style="padding: 0;">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <ion-row class="aposta-row">
+              <ion-col col-7>
+                <ion-label class="labelUsuario">Nome</ion-label>
+                <strong>{{u.nome}}</strong>
+              </ion-col>
+              <ion-col col-5>
+                <ion-label class="labelUsuario">Tipo</ion-label>
+                <strong>{{u.tipoUsuario}}</strong>
+              </ion-col>
+              <ion-col col-7>
+                <ion-label class="labelUsuario">CPF</ion-label>
+                <strong>{{cpf_mask(u.cpf)}}</strong>
+              </ion-col>
+              <ion-col col-5>
+                <ion-label class="labelUsuario">Saldo</ion-label>
+                <strong>{{u.conta.saldoLimite || 0 | currency : 'BRL'}}</strong>
+              </ion-col>
+              <ion-col col-12>
+                <ion-label class="labelUsuario">Login</ion-label>
+                <strong>{{u.login}}</strong>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-12 style="padding: 0px;">
+            <ion-row class="aposta-row">
+              <ion-col col-4 class="legendaBotoesUsuario">Editar</ion-col>
+              <ion-col col-4 class="legendaBotoesUsuario">Desabilitar</ion-col>
+              <ion-col col-4 class="legendaBotoesUsuario" style="font-size: 10px">Desvincular</ion-col>
+            </ion-row>
+            <ion-row class="aposta-row">
+              <ion-col col-4 class="botoesUsuario"><button ion-button icon-only small full (click)="showModal(u, 'INFO')" disabled="true"> <ion-icon name="create"></ion-icon></button></ion-col>
+              <ion-col col-4 class="botoesUsuario"><button ion-button icon-only small full (click)="showAlert(u, 'DESABILITA_USUARIO')" [ngClass]="{'btnDisable': u.ativo == false}"> <ion-icon name="trash"></ion-icon></button></ion-col>
+              <ion-col col-4 class="botoesUsuario"><button ion-button icon-only small full (click)="desvincularCliente(u)" color="danger"> <ion-icon name="close"></ion-icon></button></ion-col>
+            </ion-row>
+          </ion-col>
+       </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

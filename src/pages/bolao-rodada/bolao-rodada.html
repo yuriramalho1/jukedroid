@@ -1,0 +1,128 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()" color="light">Voltar</button>
+    </ion-buttons>
+    <ion-title>{{rodada.titulo}}</ion-title>
+  </ion-navbar>
+
+  <ion-grid class="gridHeader">
+    <ion-row>
+      <ion-col col-12>Prêmio: {{rodada.premio | currency : 'BRL'}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>Encerrado em {{rodada.dataFormatada}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid *ngIf="tipoBolao == 'BOLAO'">
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button icon-left (click)="toRegrasBolao()" color="secondary" class="aposta-button">
+          <ion-icon name="paper"></ion-icon>Regras do Bolão
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="headerAoVivo" *ngIf="acumuladao1x2"> 
+    <ion-row>
+      <ion-col col-6>Jogos</ion-col>
+      <ion-col col-2 style="text-align: center;">Casa</ion-col>
+      <ion-col col-2 style="text-align: center;">Empate</ion-col>
+      <ion-col col-2 style="text-align: center;">Fora</ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid class="gridLista" *ngIf="!acumuladao1x2">
+
+    <ion-row class="rowRodada" *ngFor="let partida of rodada.listaEvento; let index = index;">
+      <ion-col col-12>
+        <ion-row class="rowHeader">
+          <ion-col col-12 class="competicao">{{partida.competicao}}</ion-col>
+          <ion-col col-4>Partida {{index + 1}}</ion-col>
+          <ion-col col-8>{{partida.dataFormatada}}</ion-col>
+        </ion-row>
+        <ion-row class="rowInput">
+          <ion-col col-1 style="padding: 5px 0 5px 10px;"><img [src]="bolaoService.getImagemTime(partida.timeCasa.regiao.descricao, partida.timeCasa.nome)"/></ion-col>
+          <ion-col col-3>{{partida.timeCasa.nome}}</ion-col>
+          <ion-col col-2> <ion-input type="number" [(ngModel)]="partida.resultadoTimeUm" (ionChange)="addApostaBolao(partida)" *ngIf="!encerrado"></ion-input> </ion-col>
+          <ion-col col-2> <ion-input ion-input type="number" [(ngModel)]="partida.resultadoTimeDois" (ionChange)="addApostaBolao(partida)" *ngIf="!encerrado"></ion-input> </ion-col>
+          <ion-col col-3>{{partida.timeFora.nome}}</ion-col>
+          <ion-col col-1 style="padding: 5px 10px 5px 0;"><img [src]="bolaoService.getImagemTime(partida.timeFora.regiao.descricao, partida.timeFora.nome)"/></ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <ion-grid *ngIf="acumuladao1x2">
+    <ion-card *ngFor="let partida of rodada.listaEvento" style="padding: 0;">
+      <ion-card-content>
+        <ion-grid style="padding: 0;">
+            <ion-row>
+              <ion-col col-12 class="aovivo-title">{{partida.competicao}}</ion-col>
+              <ion-col col-6 style="padding: 0;">
+                <ion-row>
+                  <ion-col col-2 style="padding: 5px 0 5px 10px;"><img [src]="bolaoService.getImagemTime(partida.timeCasa.regiao.descricao, partida.timeCasa.nome)"/></ion-col>
+                  <ion-col col-10 class="aovivo-title">{{partida.timeCasa.nome}}</ion-col>
+
+                  <ion-col col-2 style="padding: 5px 0 5px 10px;"><img [src]="bolaoService.getImagemTime(partida.timeFora.regiao.descricao, partida.timeFora.nome)"/></ion-col>
+                  <ion-col col-10 class="aovivo-title">{{partida.timeFora.nome}}</ion-col>
+                  
+                  <ion-col col-12 class="aovivo-subtitle">{{partida.dataFormatada}}</ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col col-6 style="padding: 0;">
+                <ion-row>
+                  <ion-col col-4 style="padding: 2px;">
+                    <button ion-button full (click)="addAposta1x2(partida, partida.timeCasa.nome)" [color]="buttonStyle(partida, partida.timeCasa.nome)">
+                      <span>1</span>
+                    </button>
+                  </ion-col>
+                  <ion-col col-4 style="padding: 2px;">
+                    <button ion-button full (click)="addAposta1x2(partida, 'X')" [color]="buttonStyle(partida,'X')">
+                      <span>X</span>
+                    </button>
+                  </ion-col>
+                  <ion-col col-4 style="padding: 2px;">
+                    <button ion-button full (click)="addAposta1x2(partida, partida.timeFora.nome)" [color]="buttonStyle(partida, partida.timeFora.nome)">
+                      <span>2</span>
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+      </ion-card-content>
+  </ion-card>
+  </ion-grid>
+
+
+  <ion-card *ngIf="tipoBolao == 'BOLAO'" class="gridHeader" style="margin: 0; width: 100%; margin-top: 20px; text-align: center;">
+    <ion-card-content class="msgBolaoIcon"> 
+      <ion-grid>
+        <ion-row>
+          <ion-col col-1><ion-icon name="trophy"></ion-icon></ion-col>
+          <ion-col col-11><h4>O Bilhete que fizer mais pontos vence o bolão, no caso de empate o prêmio será dividido entre os vencedores.</h4></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer class="resumo" *ngIf="bolaoService.getBilheteBolao().listaApostas.length > 0 && !encerrado" (click)="toBilheteBolao()">
+  <ion-grid style="padding: 0;">
+    <ion-row class="resumoAposta">
+      <ion-col col-3 style="margin-top: 9px;">Resumo</ion-col>
+      <ion-col col-3 class="colunaResumo">{{bolaoService.getBilheteBolao().listaApostas.length}}<br/>Jogos</ion-col>
+      <ion-col col-3 offset-1 class="colunaResumo">{{bolaoService.getBilheteBolao().valorPossivelRetorno || 0 | currency : 'BRL' : 'symbol'}}<br/>Retorno</ion-col>
+      <ion-col col-2 style="text-align: center;"><ion-icon name="arrow-dropup" style="font-size: 24px; margin-top: 2px;"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

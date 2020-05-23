@@ -1,0 +1,471 @@
+// FONT AWESOME
+$fa-font-path: "../assets/fonts" !default;
+@import "font-awesome";
+i[class^="fa-"], ion-icon[class^="fa-"] {
+   font-family: "FontAwesome" !important;
+}
+
+
+// CSS GERAL
+.toolbar-background{
+    background-color: color($colors, primary, base)
+}
+
+.tituloPesquisa{
+  text-align: center;
+  background-color: color($colors, primary, base)
+}
+
+.pesquisaTime{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.pesquisaTime .campoBusca{
+  padding: 0;
+}
+
+.pesquisaTime .btnBuscar{
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0 0.2rem;
+}
+
+.pesquisaTime .campoBusca ion-item{
+  background-color: transparent;
+  color: color($colors, title, base);
+}
+
+.pesquisaTime ion-input input{
+  margin-top: 10px;
+}
+
+.pesquisaTime ion-input input::placeholder{
+  color: color($colors, title, base);
+}
+
+.text-rodape{
+  min-height: 2.4rem;
+}
+
+.text-rodape ion-label{
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.toolbar-title{
+    color: color($colors, title, base);
+    font-size: 1.5rem;
+}
+
+.bar-buttons{
+    color: color($colors, title, base)
+}
+
+.menu-inner>.content>.scroll-content{
+    background-color: color($colors, menu-background, base);
+}
+
+.menu-inner>.content>.scroll-content>.list>.item{
+    background-color: color($colors, menu-background, base);
+    color: color($colors, menu-subtext, base);
+}
+
+.menu-inner>.content>.scroll-content>.list>.item>.item-inner>.input-wrapper>.label>.icon{
+    color: color($colors, menu-text, base);
+}
+
+.menu-inner>.content>.scroll-content>.list>.item>.item-inner{
+    border: 0px;
+}
+
+.menu-inner>.content>.scroll-content>.list>.item-divider{
+    padding-top: 10px;
+    text-align: left;
+    border-bottom: 1px solid color($colors,menu-subtext,base);
+    font-size: 10pt;
+}
+
+.menu-inner>.content>.scroll-content>.list>.item-divider>.item-inner>.input-wrapper>.label{
+    margin-bottom: 5px;
+    color: color($colors,menu-subtext,base);
+}
+
+
+.text-menu{
+    position: absolute;
+    left: 50px;
+}
+
+.menu-usuario>.nome{
+    margin: 5px;
+    color: color($colors,menu-text,base);
+    display: block;
+}
+
+.menu-usuario>.email{
+    margin: 5px;
+    color: color($colors,menu-subtext,base);
+    display: block;
+}
+
+.menu-usuario>.saldo{
+    margin: 5px;
+    color: color($colors,menu-text,base);
+    display: block;
+}
+
+.menu-usuario>.saldo>.saldo-valor{
+    color: color($colors,dinheiro,base);
+}
+
+.back-button{
+    color: color($colors,title,base);
+}
+
+.partida-subtitle{
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.partida-botoes-title{
+    text-align: center;
+}
+
+.partida-botoes-title>.col{
+    padding: 0px;
+}
+
+.bilhete-quantidade{
+    background: color($colors,title,base);
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+}
+
+.bilhete-quantidade-conteudo{
+    @extend .bilhete-quantidade;
+    background: color($colors,secondary,base);
+    color: #000;
+}
+
+.aposta-confirmar{
+    background: color($colors,title,base);
+    border-radius: 15px;
+    height: 30px;
+    font-weight: bold;
+}
+
+.aposta-confirmar-conteudo{
+    @extend .aposta-confirmar;
+    background: color($colors,secondary,base);
+}
+
+.aposta-title{
+    font-weight: bold;
+}
+
+.aposta-description{
+    font-weight: normal;
+}
+
+.aposta-button{
+    width: 100%;
+}
+
+.button-100{
+    width: 100%;
+    margin-top: 18px;
+}
+
+.texto-menor{
+    font-size: 1.2rem;
+    text-align: justify;
+}
+
+.aposta-selecionada{
+    background: color($colors,secondary,base);
+}
+
+.opcaoCotacaoAtiva{
+    color: color($colors,secondary,base);
+}
+
+.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom-color: #dedede;
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.datetime{
+    padding-bottom: 0px;
+}
+
+.aposta-nao-apurada{
+    color: color($colors, menu-subtext, base)
+}
+.aposta-vencedora{
+    color: color($colors, dinheiro, base)
+}
+.aposta-perdedora{
+    color: color($colors, danger, base)
+}
+
+.danger{
+    color: color($colors, danger, base);
+    text-align: left;
+}
+
+.opcoesCotacaoAtiva{
+  background-color: #dedede;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+
+.alertCompeticoes .alert-head,
+.alertSimulacao .alert-head,
+.alertCompeticoes .alert-message{
+  text-align: center;
+  color: #000;
+}
+
+.alertSimulacao .alert-title{
+  font-size: 16px;
+}
+
+.alertSimulacao .alert-message,{
+  text-align: center;
+  color: #000;
+  font-size: 22px;
+}
+
+.alertCompeticoes .alert-wrapper,
+.alertSimulacao .alert-wrapper{
+  border-radius: 16px;
+}
+
+.alertCompeticoes .alert-button-group,
+.alertSimulacao .alert-button-group{
+  border-top: solid 1px #e6e5e5;
+}
+
+.alertCompeticoes .alert-button,
+.alertSimulacao .alert-button{
+  width: 100%;
+}
+
+.alertCompeticoes .alert-button .button-inner,
+.alertSimulacao .alert-button .button-inner,{
+  text-align: center;
+  font-weight: bold;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.alertSaldo .alert-head h2{
+  color: #000;
+  font-size: 17px;
+  text-align: center;
+}
+.alertSaldo .alert-message{
+  text-align: justify;
+  font-size: 12px;
+  color: #000;
+}
+
+.alertSaldo .alert-wrapper{
+  border-radius: 16px;
+  max-width: 330px;
+}
+
+.alertSaldo .alert-button-group{
+  border-top: solid 1px #e6e5e5;
+}
+
+.alertSaldo .alert-button{
+  width: 100%;
+}
+
+.alertSaldo .alert-button .button-inner{
+  text-align: center;
+  font-weight: bold;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+i.iconeCompeticao::before{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 14px;
+  height: 14px;
+  margin-left: 5px;
+  margin-bottom: -1px;
+  margin-right: 5px;
+  display: inline-block;
+  content: " "
+}
+
+.iconeRegiao{
+  width: 14px;
+  height: 14px;
+  margin-left: 5px;
+  margin-bottom: -1px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+
+i.JOGOS_DO_DIA::before {
+  background-image: url("../assets/imgs/jogosdodia.png");
+}
+
+i.Futebol::before{
+  width:  20px;
+  height: 20px;
+  background-image:url("../assets/imgs/futebol.png");
+}
+i.Tênis::before{
+  width:  20px;
+  height: 20px;
+  background-image:url("../assets/imgs/tenis-em-preto.png");
+}
+i.Vôlei::before{
+  width:  20px;
+  height: 20px;
+  background-image:url("../assets/imgs/volley.png");
+}
+i.Combate::before{
+  width:  20px;
+  height: 20px;
+  background-image:url("../assets/imgs/combate-preto.png");
+}
+
+.background-Futebol{
+  background-image:url("../assets/imgs/background-futebol.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.background-Combate{
+  background-image:url("../assets/imgs/background-ufc.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.background-Tênis{
+  background-image:url("../assets/imgs/background-tenis.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.background-Tênis .item-md,
+.background-Combate .item-md{
+  background-color: transparent;
+}
+
+.background-Tênis .item-md .item-inner,
+.background-Combate .item-md .item-inner{
+  border-color: #000;
+}
+
+
+
+.resumoAposta{
+  background-color: color($colors, primary, base);
+  color: #fff;
+  padding: 5px 10px;
+}
+
+.colunaResumo{
+  background-color: color($colors, secondary, base);
+  text-align: center;
+  font-size: 13px;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.8), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.8), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.8), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  color: #fff;
+  font-weight: 500;
+}
+
+.legendas ion-row{
+  padding-top: 5px;
+}
+
+.legendas ion-col[col-9]{
+  padding-bottom: 0;
+}
+
+.legenda{
+  padding: 5px;
+  padding-bottom: 0;
+}
+
+.verde{
+  background-color: #3ada3f;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.vermelho{
+  background-color: #da3a3a;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.azul{
+  background-color: #3a4eda;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.esporte-title{
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1976d2;
+  margin-bottom: 25px !important;
+}
+
+.legendaBotoesUsuario{
+  font-size: 11px;
+  text-align: center;
+  margin: auto 0;
+  padding: 0;
+}
+
+.labelUsuario{
+  color:#999;
+  margin: 0;
+}
+
+.titleCenter{
+  text-align: center;
+}
+
+.alertVersao .alert-wrapper{
+  max-width: 300px;
+}
+
+.alertVersao .alert-wrapper .alert-head{
+  padding: 10px;
+}
+
+.alertVersao .alert-wrapper .alert-head h2{
+  font-size: 18px;
+}
+
+.alertVersao .alert-wrapper .alert-head h3{
+  white-space: pre-line;
+  text-align: justify;
+  font-size: 14px;
+  margin: 10px 0 0;
+}

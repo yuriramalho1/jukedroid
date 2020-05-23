@@ -1,0 +1,140 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Adicionar Crédito</ion-title>
+    <ion-buttons end>
+      <button ion-button [class]="bilhete.listaApostas.length == 0 ? 'bilhete-quantidade' : 'bilhete-quantidade-conteudo'" (click)="toBilhete()">
+        {{bilhete.listaApostas.length}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form (ngSubmit)="clickCreditar()" novalidate enctype="multipart/form-data">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12><h5>Instruções</h5></ion-col>
+        <ion-col col-2><span class="instrucaoStep"><b>1</b></span></ion-col>
+        <ion-col col-10><p class="instrucaoText">Informe o valor que deseja depositar no campo correspondente no formulário abaixo;</p></ion-col>
+        <ion-col col-2><span class="instrucaoStep"><b>2</b></span></ion-col>
+        <ion-col col-10><p class="instrucaoText">Se desejar, insira uma descrição para facilitar a identificação do depósito no histórico;</p></ion-col>
+        <ion-col col-2><span class="instrucaoStep"><b>3</b></span></ion-col>
+        <ion-col col-10><p class="instrucaoText">Realize o TED, DOC ou transferência utilizando os dados de alguma das contas abaixo, após isso, anexe o comprovante;</p></ion-col>
+      </ion-row>
+    </ion-grid>
+    <br />
+   
+      <ion-label style="font-weight:bold;">Tipo de depósito</ion-label>
+      <ion-select style="font-weight:bold;" [(ngModel)]="tipoDeposito" placeholder="Selecione..." interface="action-sheet" name="tipoDeposito">
+        <ion-option value="TRANSFERENCIA_ENTRE_CONTA">Transferência entre Contas (mesmo  banco)</ion-option>
+        <ion-option value="TED">TED</ion-option>
+        <ion-option value="DOC">DOC</ion-option>
+        <ion-option value="DINHEIRO_CAIXA_AGENCIA">Dinheiro no caixa da agência</ion-option>
+        <ion-option value="DINHEIRO_CAIXA_ELETRONICO">Dinheiro no caixa eletrônico</ion-option>
+      </ion-select>
+    
+
+    <ion-list radio-group [(ngModel)]="bancoDestino" name="bancoDestino" style="margin: 0px;">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <ion-list-header style="margin-bottom: 0px; font-weight:bold;">
+              Conta
+            </ion-list-header>
+            <img class="bradesco-img" style="height:35px; margin-top:18px" />
+          </ion-col>
+          <ion-col col-9>
+            <ion-list-header style="margin-bottom: 0px; font-weight:bold;">
+              
+            </ion-list-header>
+            <ion-item class="texto-menor"> 
+            <ion-label text-wrap>Banco Bradesco <br /> 
+              Agência: 3461 - Conta: 3552-1 <br />
+              TITULAR: Almir da Costa Machado 
+              <br/> CPF: 048.211.444-41</ion-label>
+            <ion-radio value="BANCO_BRADESCO"></ion-radio>
+          </ion-item>
+         </ion-col> 
+        </ion-row>
+      </ion-grid>  
+
+
+
+
+    </ion-list>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-1 style="position: relative; top: 45px;">
+          R$
+        </ion-col>
+        <ion-col col-3>
+          <ion-item>
+            <ion-label style="font-weight:bold;" stacked>Valor</ion-label>
+            <ion-input type="number" [(ngModel)]="valor" name="valor"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-1 style="position: relative; top: 45px;">
+          ,00
+        </ion-col>
+        <ion-col col-7>
+          <button ion-button color="primary" outline (click)="getImage()" type="button" class="button-100" icon-left>
+            <ion-icon name="camera"></ion-icon> Anexar Comprovante
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-textarea placeholder="Observação(Opcional)" [(ngModel)]="observacao" name="observacao" rows="4"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button color="primary" type="submit" class="button-full">Adicionar Crédito</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="transacoesPendentes">
+      <ion-row col-12 *ngIf="transacoesPendentes.length > 0"> <ion-col col-12><h4 style="text-align: center;">Depositos Pendentes</h4></ion-col></ion-row>
+      <ion-row *ngFor="let transacao of transacoesPendentes" class="depositoPendente" col-12>
+        <ion-row style="border-bottom: dashed 1px gray;" col-12>
+          <ion-col col-5>
+            <ion-col col-12><ion-label>Código: {{transacao.id}}</ion-label></ion-col>
+            <ion-col col-12><b>{{transacao.tipoDepositoDesc}}</b></ion-col>
+            <ion-col col-12><ion-label style="whitespace:normal;">{{transacao.bancoDestinoDesc}}</ion-label></ion-col>
+          </ion-col>
+          <ion-col col-7 style="text-align: right;">
+            <ion-col col-12><button type="button" ion-button small color="secondary" (click)="comprovante(transacao)" >Comprovante <button type="button" style="color: #000; margin-right: -15px;" ion-button (click)="addComprovantePendente(transacao)" icon-only clear icon-end full><ion-icon name="add"></ion-icon></button></button></ion-col>
+            <ion-col col-12 style="display: block;"> <br/> <br/> </ion-col>
+            <ion-col col-12>{{transacao.dataFormatada}}</ion-col>
+          </ion-col>
+        </ion-row>
+        <ion-row style="border-bottom: dashed 1px gray;" col-12>
+          <ion-col col-12 style="display: block">
+            <ion-label>Valor do Depósito</ion-label>
+            <b>{{transacao.valor | currency:'BRL':"symbol"}}</b>
+            <ion-label>Descrição <ion-icon name="create"></ion-icon></ion-label>
+            <span style="text-align: justify;">{{transacao.observacao}}</span>
+          </ion-col>
+        </ion-row>
+        <ion-row col-12>
+          <ion-col col-12 style="display: block">
+            <button ion-button ion-button icon-only class="depositoRemover"><ion-icon name="trash"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

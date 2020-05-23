@@ -1,0 +1,65 @@
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Lançamento Manual</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <ion-item>
+      <ion-label>Descrição</ion-label>
+      <ion-select [(ngModel)]="descricaoLancamento" placeholder="Selecione..." interface="action-sheet" name="descricaoLancamento">
+        <ion-option value="DEPOSITO_CLIENTE">Depósito Cliente</ion-option>
+        <ion-option value="SAQUE_CLIENTE">Saque Cliente</ion-option>
+        <ion-option value="BILHETE">Bilhete</ion-option>
+        <ion-option value="PAGAMENTO_CLIENTE">Pagamento Cliente</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Código do Bilhete</ion-label>
+      <ion-input type="number" [(ngModel)]="idBilhete" name="idBilhete"></ion-input>
+    </ion-item>
+
+    <button ion-button color="secondary" type="button" class="button-full" (click)="pesquisarBilhete()">Pesquisar</button>
+
+    <ion-card *ngIf="bilhete != undefined">
+      <ion-card-header>
+        Detalhe do Bilhete
+        <br />
+        <span class="partida-subtitle" style="text-transform: uppercase">{{bilhete.numeroBilhete}}</span>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="aposta-row">
+            <ion-col col-6 class="aposta-title">Código do Bilhete</ion-col>
+            <ion-col col-6 class="aposta-description">{{bilhete.id}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-6 class="aposta-title">Cliente</ion-col>
+            <ion-col col-6 class="aposta-description">{{bilhete.clienteNome}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-6 class="aposta-title">Data do Bilhete</ion-col>
+            <ion-col col-6 class="aposta-description">{{bilhete.dataFormatada}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-6 class="aposta-title">Valor do Bilhete</ion-col>
+            <ion-col col-6 class="aposta-description">{{bilhete.valor | currency : 'BRL'}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-6 class="aposta-title">Valor a ser Pago(Prêmio)</ion-col>
+            <ion-col col-6 class="aposta-description">{{bilhete.valorPossivelRetorno | currency : 'BRL'}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  
+    <button ion-button color="primary" type="button" class="button-full" (click)="pagar()" *ngIf="bilhete != undefined">Pagar</button>
+
+  </ion-content>

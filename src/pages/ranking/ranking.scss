@@ -1,0 +1,41 @@
+page-ranking {
+    .linha{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .posicao{
+        width: 55px;
+        min-height: 50px;
+        background-color: #f3f3f3;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding-top: 16px;
+        font-size: 1.1em;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .posicaoBranco{
+        width: 55px;
+        background-color: transparent;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .descricao{
+        border: 1px solid #DDD;
+        min-height: 50px;
+    }
+
+    .descricao>.col{
+        margin:auto;
+    }
+
+    .posicao1{
+        background-image: url("../assets/imgs/coroa-romana.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+}

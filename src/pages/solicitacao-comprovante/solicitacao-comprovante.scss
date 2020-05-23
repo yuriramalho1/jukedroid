@@ -1,0 +1,24 @@
+page-solicitacao-comprovante {
+    html, body {
+        height: 100%;
+        min-height: 100%;
+      }
+      
+      body {
+        font: 15px arial;
+      }
+      
+      .scroll-content {
+        margin-top: 0px !important;
+        height: 100%;
+        min-height: 100%;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+
+        background-color: color($colors,dark,base);
+      }
+}

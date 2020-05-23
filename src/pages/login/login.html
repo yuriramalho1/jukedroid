@@ -1,0 +1,99 @@
+<ion-content>
+  <div class="conteudo-outter-top">
+    <div class="conteudo-middle">
+      <div class="conteudo-inner">
+        <img class="logo-img" />
+      </div>
+    </div>
+  </div>
+  <div class="conteudo-outter-bottom">
+    <div class="conteudo-middle">
+      <div class="conteudo-inner" *ngIf="inicio">
+        <button ion-button color="login" (click)="clickInicioCadastrar()" class="button-center">CADASTRAR-SE</button>
+        <button ion-button color="login" (click)="clickInicioEntrar()" class="button-center" outline>ENTRAR</button>
+      </div>
+      <div class="conteudo-inner" *ngIf="cadastrar">
+        <form (ngSubmit)="clickCadastrar($event); $event.preventDefault()">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item>
+                  <ion-label color="login" stacked>Nome</ion-label>
+                  <ion-input color="login" type="text" [(ngModel)]="cadastroNome" name="cadastroNome"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item>
+                  <ion-label color="login" stacked>Login</ion-label>
+                  <ion-input color="login" type="email" [(ngModel)]="cadastroLogin" name="cadastroLogin" (ionBlur)="verificaLogin()" (ionChange)="existeLogin = false"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="existeLogin && (cadastroLogin != undefined && cadastroLogin.length > 0)">
+              <ion-col col-12 class="danger">
+                <ion-icon name="warning"></ion-icon> Login já existente
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <ion-item>
+                  <ion-label color="login" stacked>Senha</ion-label>
+                  <ion-input color="secondary" type="password" [(ngModel)]="cadastroSenha" name="cadastroSenha"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-6>
+                  <ion-item>
+                    <ion-label color="login" stacked>Confirmação da Senha</ion-label>
+                    <ion-input color="primary" type="password" [(ngModel)]="cadastroConfirmacao" name="cadastroConfirmacao"></ion-input>
+                  </ion-item>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+          <div>
+            <button ion-button color="secondary" type="submit" class="button-right botaoEntrar" [disabled]="!validaForm()">CADASTRAR-SE</button>
+          </div>
+          <div >
+            <button style="width: 100% !important; margin-bottom: -14vh; border-color: secondary;" ion-button color="login" 
+            (click)="clickInicioEntrar()" class="button-center" outline>LOGAR-SE</button>
+        </div>
+        </form>
+      </div>
+      <div class="conteudo-inner" *ngIf="entrar">
+        <form (ngSubmit)="clickEntrar()" novalidate>
+          <ion-item>
+            <ion-label color="login" stacked>LOGIN</ion-label>
+            <ion-input color="login" type="email" [(ngModel)]="login" name="login" placeholder="Digite seu Login"></ion-input>
+          </ion-item>
+          <div class="esqueceu-senha">
+            <a href="{{recuperarSenhaLink}}">Esqueci minha senha</a>
+          </div>
+          <ion-item>
+            <ion-label color="login" stacked>SENHA</ion-label>
+            <ion-input color="login" type="password" [(ngModel)]="senha" name="senha" placeholder="Digite sua Senha"></ion-input>
+          </ion-item>
+          <div class="lembrar">
+            <ion-label>Salvar Conta</ion-label>
+            <ion-toggle color="secondary" checked="lembrar" [(ngModel)]="lembrar" name="lembrar" large></ion-toggle>
+          </div>
+          <div>
+            <span  class="mensagemLogin" *ngIf="mensagem.length > 0">
+            <i  class="fa fa-remove"></i> {{mensagem}}</span>
+            <button ion-button type="submit" class="button-right botaoEntrar" color="secondary">
+              ACESSAR
+            </button>
+          </div>
+
+          <div >
+            <button style="width: 100% !important; margin-bottom: -14vh; border-color: secondary;" ion-button color="login" (click)="clickInicioCadastrar()" class="button-center" outline>CADASTRAR-SE</button>
+          </div>
+
+          <div class="esqueceu-senha">
+           
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

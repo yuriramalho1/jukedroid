@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Ranking</ion-title>
+  </ion-navbar>
+
+  <ion-grid class="gridCategoria">
+    <ion-row>
+      <ion-col col-12>
+        <ion-segment [(ngModel)]="tipoCategoria">
+          <ion-segment-button [ngClass]="{'segment-platinum': tipoCategoria == 'PLATINUM',
+                                          'segment-ouro':     tipoCategoria == 'OURO',
+                                          'segment-prata':    tipoCategoria == 'PRATA',
+                                          'segment-bronze':   tipoCategoria == 'BRONZE'}"
+                               *ngFor="let categoria of categorias" value="{{categoria.tipoCategoriaPremiacao}}" (click)="tipoCategoria = categoria.tipoCategoriaPremiacao; prepareCategoria(categoria)">
+            {{descricaoCategoria(categoria.tipoCategoriaPremiacao)}}
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding *ngIf="premiacoes && premiacoes.length > 0">
+  <ion-item style="margin-top: 30px;">
+    <ion-label stacked>Premiação</ion-label>
+    <ion-select [(ngModel)]="premiacao" (ngModelChange)="loadCategorias(premiacao)" >
+      <ion-option *ngFor="let prem of premiacoes" [value]="prem">{{prem.nome}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <img [src]="getRankingImage()" alt="top-ranking" />
+
+  <div *ngIf="categoriaUsuario && categoriaUsuario.usuarioVencedor">
+    <ion-label class="estrela-img" style="margin: 1.5em auto;">
+      <b>MINHA POSIÇÃO</b>
+      <img src="assets/imgs/estrela-{{tipoCategoria.toLowerCase()}}.png"/>
+    </ion-label>
+
+    <ion-grid>
+      <ion-row style="font-weight: bold">
+        <ion-col col-5>
+          Nome
+        </ion-col>
+        <ion-col col-4 style="text-align: center">
+          Vitórias
+        </ion-col>
+        <ion-col col-3 style="text-align: center">
+          Cotação
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="linha">
+      <div [class]="categoriaUsuario.sortId == 1 ? 'posicao posicao1' : 'posicao'">
+        {{categoriaUsuario.sortId}}
+      </div>
+
+      <ion-grid>
+        <ion-row class="descricao">
+          <ion-col col-5>
+            {{categoriaUsuario.usuarioVencedor.apelido == '' || categoriaUsuario.usuarioVencedor.apelido == undefined ? categoriaUsuario.usuarioVencedor.nome : categoriaUsuario.usuarioVencedor.apelido}}
+          </ion-col>
+          <ion-col col-3 style="text-align: center">
+            {{categoriaUsuario.usuarioVencedor.listaBilheteAposta?.length}}
+          </ion-col>
+          <ion-col col-4 style="text-align: center; color: #1976d2">
+            {{categoriaUsuario.usuarioVencedor.totalCotacaoRanking | number:'1.2-2':'pt-BR'}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  <div *ngIf="categoriaSelecionada">
+    <ion-label class="estrela-img" style="margin: 1.5em auto;">
+      <b>RANKING - OS MELHORES</b>
+      <img src="assets/imgs/estrela-{{tipoCategoria.toLowerCase()}}.png"/>
+    </ion-label>
+
+    <ion-grid>
+      <ion-row style="font-weight: bold">
+        <ion-col col-5>
+          Nome
+        </ion-col>
+        <ion-col col-4 style="text-align: center">
+          Vitórias
+        </ion-col>
+        <ion-col col-3 style="text-align: center">
+          Cotação
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="linha" *ngFor="let categoriaVencedor of categoriaSelecionada.listaPremiacaoCategoriaVencedor">
+      <div [class]="categoriaVencedor.sortId == 1 ? 'posicao posicao1' : 'posicao'">
+        {{categoriaVencedor.sortId}}
+      </div>
+
+      <ion-grid>
+        <ion-row class="descricao">
+          <ion-col col-5>
+            {{categoriaVencedor.usuarioVencedor.apelido == '' || categoriaVencedor.usuarioVencedor.apelido == undefined ? categoriaVencedor.usuarioVencedor.nome : categoriaVencedor.usuarioVencedor.apelido}}
+          </ion-col>
+          <ion-col col-3 style="text-align: center">
+            {{categoriaVencedor.usuarioVencedor.listaBilheteAposta?.length}}
+          </ion-col>
+          <ion-col col-4 style="text-align: center; color: #1976d2">
+            {{categoriaVencedor.usuarioVencedor.totalCotacaoRanking | number:'1.2-2':'pt-BR'}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

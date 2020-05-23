@@ -1,0 +1,109 @@
+<!--
+  Generated template for the PerfilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Editar Perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="clickConfirmar($event); $event.preventDefault()">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label stacked>Nome</ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.nome" name="cadastroNome"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col col-12>
+          <ion-item>
+            <ion-label stacked>Perfil</ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.tipoUsuario" name="tipoUsuario" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-label stacked>Apelido</ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.apelido" name="apelido"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col col-12>
+          <ion-item>
+            <ion-label stacked>E-mail</ion-label>
+            <ion-input type="email" [(ngModel)]="usuario.email" name="cadastroEmail" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="existeEmail && (usuario.email == undefined || usuario.email.length > 0)">
+        <ion-col col-12 class="danger">
+          <ion-icon name="warning"></ion-icon> Email já existente
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>CPF</ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.cpf" name="cadastroCpf" (ionBlur)="verificaCpf()" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Data de Nascimento</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="usuario.dataNascimentoCadastro" name="cadastroDataNascimento"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="existeCpf && (usuario.cpf == undefined || usuario.cpf.length > 0)">
+        <ion-col col-12 class="danger">
+          <ion-icon name="warning"></ion-icon> Cpf já existente
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Login</ion-label>
+            <ion-input type="email" [(ngModel)]="usuario.login" name="cadastroLogin" readonly></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label stacked>Celular</ion-label>
+            <ion-input type="text" placeholder="(99)99999-9999" [(ngModel)]="usuario.celular" name="cadastroCelular" (ionBlur)="usuario.celular = formatFone(usuario.celular)"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="existeLogin && (usuario.login == undefined || usuario.login.length > 0)">
+        <ion-col col-12 class="danger">
+          <ion-icon name="warning"></ion-icon> Login já existente
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 style="text-align: center">
+          <a (click)="clickAlterarSenha()">Alterar a Senha</a>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button color="primary" type="submit" class="aposta-button" [disabled]="!validaForm()">CONFIRMAR</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button color="primary" type="button" (click)="clickCancelar()" outline class="aposta-button">
+            CANCELAR
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

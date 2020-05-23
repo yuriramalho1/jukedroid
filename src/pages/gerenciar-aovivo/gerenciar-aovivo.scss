@@ -1,0 +1,29 @@
+page-gerenciar-aovivo {
+  ion-card-header{
+    white-space: normal;
+  }
+  ion-card-content{
+    padding: 0px !important;
+  }
+
+  .aovivo-title{
+    font-size: 1.1rem;
+    color: color($colors, primary, base);
+    font-weight: bold;
+  }
+
+  .aovivo-subtitle{
+    font-size: 1rem;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .headerAoVivo{
+    padding: 0px 12px;
+    font-size: 1.1rem;
+  }
+
+  ion-button{
+    font-size: 1rem;
+  }
+}

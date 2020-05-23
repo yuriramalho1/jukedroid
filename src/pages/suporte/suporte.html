@@ -1,0 +1,46 @@
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Suporte</ion-title>
+      <ion-buttons end>
+        <button ion-button [class]="bilhete.listaApostas.length == 0 ? 'bilhete-quantidade' : 'bilhete-quantidade-conteudo'" (click)="toBilhete()">
+          {{bilhete.listaApostas.length}}
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+
+  </ion-header>
+
+  <ion-content padding>
+    <ion-card>
+      <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12><h2 style="text-align: center;">Fale conosco em caso de dúvida, sugestão ou elogio.</h2></ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12 class=""><ion-icon name="mail"></ion-icon> E-MAIL</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>jukedroidgoias@gmail.com</ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12 class=""><ion-icon name="logo-whatsapp"></ion-icon> WHATSAPP</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>(062) 9 9102-0935</ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-content>

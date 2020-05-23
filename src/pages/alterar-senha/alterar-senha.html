@@ -1,0 +1,56 @@
+<!--
+  Generated template for the PerfilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Alterar Senha</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <form (ngSubmit)="clickConfirmar($event); $event.preventDefault()">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label stacked>Senha Atual</ion-label>
+              <ion-input type="password" [(ngModel)]="senhaAtual" name="senhaAtual"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label stacked>Nova Senha</ion-label>
+              <ion-input type="password" [(ngModel)]="novaSenha" name="novaSenha"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label stacked>Confirmação da Senha</ion-label>
+              <ion-input type="password" [(ngModel)]="confirmacao" name="confirmacao"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      
+        <ion-row>
+          <ion-col col-6>
+            <button ion-button color="primary" type="submit" class="aposta-button">CONFIRMAR</button>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button color="primary" type="button" (click)="clickCancelar()" outline class="aposta-button">
+              CANCELAR
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>

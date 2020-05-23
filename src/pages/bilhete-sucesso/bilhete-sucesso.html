@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="voltar()" color="light">Voltar</button>
+    </ion-buttons>
+    <ion-title>Bilhete</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12><img src="{{imagemTeste}}"/></ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-4><button ion-button block color="primary" >Compartilhar</button></ion-col>
+      <ion-col col-4><button ion-button block color="secondary">Imprimir</button></ion-col>
+      <ion-col col-4><button ion-button block color="light">Cancelar</button></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,88 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()" style="font-size: 18px; color: #fff">
+        <ion-icon name="arrow-dropdown"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Bilhete {{tipoBolao == 'BOLAO' ? 'Bolão' : 'Acumuladão'}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-card *ngFor="let aposta of bilhete.listaApostas">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Competição</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.competicao}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Evento</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.evento}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Data</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.dataFormatada}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Tipo de Aposta</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.tipoAposta}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Escolha</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.escolha}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <ion-grid>
+    <ion-row style="font-weight: bold">
+      <ion-col col-12 style="text-align: center">
+        Possível Retorno
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 style="text-align: center">
+        {{bilhete.valorPossivelRetorno || 0 | currency : 'BRL' : 'symbol'}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label stacked>Valor da Aposta</ion-label>
+          <ion-input type="number" [(ngModel)]="bilhete.valor" [readonly]="true"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6 *ngIf="usuarioGerente()">
+        <button ion-button (click)="openListaCliente()" icon-left color="secondary" class="aposta-button" style="margin-top: 20px">
+          <ion-icon name="add-circle"></ion-icon> Cliente
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="usuarioGerente() || !usuario.id">
+      <ion-col col-10>
+        <ion-item>
+          <ion-label stacked>Nome do Cliente</ion-label>
+          <ion-input type="text" [(ngModel)]="bilhete.clienteNome" [disabled]="bilhete.cliente != undefined && bilhete.cliente.id > 0"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button (click)="limparCliente()" icon-only color="danger" class="aposta-button" style="margin-top: 20px">
+          <ion-icon name="trash"></ion-icon></button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button (click)="confirmarBilhete()" icon-left class="aposta-button">
+          <ion-icon name="checkmark-circle"></ion-icon> {{isSimulacao ? 'Simular Aposta' : 'Confirmar Aposta'}} </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

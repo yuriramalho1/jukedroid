@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Lançar Resultado</ion-title>
+      <ion-buttons end>
+        <button ion-button [class]="apostasSelecionadas.length == 0 ? 'aposta-confirmar' : 'aposta-confirmar-conteudo'" (click)="confirmar()">
+          Confirmar
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-card *ngFor="let aposta of apostas">
+      <ion-card-header>
+        {{aposta.evento}}
+        <br />
+        <span class="partida-subtitle" style="text-transform: uppercase">{{aposta.competicao}}</span>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Tipo</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.tipoAposta}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Data</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.dataFormatada}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Escolha</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.escolha}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <button ion-button (click)="adicionaAposta(aposta,'VENCEDORA')" color="primary" class="aposta-button" [outline]="verificaAposta(aposta,'VENCEDORA')"> Vencedora </button>
+            </ion-col>
+            <ion-col col-6>
+              <button ion-button (click)="adicionaAposta(aposta,'PERDEDORA')" color="danger" class="aposta-button" [outline]="verificaAposta(aposta,'PERDEDORA')"> Perdedora </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>

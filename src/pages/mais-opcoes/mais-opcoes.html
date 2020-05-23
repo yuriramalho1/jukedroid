@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{partida.timeCasa}} x {{partida.timeFora}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+      <ion-item ion-item *ngFor="let opcaoCotacao of opcoesCotacao" >
+        <button ion-item (click)="opcaoCotacao.ativo = !opcaoCotacao.ativo;" >
+          <ion-item text-wrap >
+            <span [class]="opcaoCotacao.ativo ? 'opcaoCotacaoAtiva' : '' ">{{opcaoCotacao.descricao}}</span>
+          </ion-item>
+        </button>
+        <ion-grid *ngIf="opcaoCotacao.ativo" class="opcoesCotacaoAtiva">
+          <ion-row *ngFor="let itemCotacao of opcaoCotacao.listaItensCotacao" style="border-bottom: 1px solid #DDD">
+            <ion-col col-8 style="margin: auto; white-space: normal;">
+              {{itemCotacao.descricao}}
+            </ion-col>
+            <ion-col col-4>
+              <button ion-button style="width: 100%" (click)="selecionaItemCotacao(opcaoCotacao, itemCotacao)" [color]="buttonStyle(opcaoCotacao, itemCotacao)">
+                {{itemCotacao.cotacao}}
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="resumo" *ngIf="bs.getBilhete().listaApostas.length > 0" (click)="toBilhete()">
+  <ion-grid style="padding: 0;">
+    <ion-row class="resumoAposta">
+      <ion-col col-3 style="margin-top: 9px;">Resumo</ion-col>
+      <ion-col col-3 class="colunaResumo">{{bs.getBilhete().listaApostas.length}}<br/>Jogos</ion-col>
+      <ion-col col-3 offset-1 class="colunaResumo">{{bs.getBilhete().valorPossivelRetorno || 0 | currency : 'BRL' : 'symbol'}}<br/>Retorno</ion-col>
+      <ion-col col-2 style="text-align: center;"><ion-icon name="arrow-dropup" style="font-size: 24px; margin-top: 2px;"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Regras</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row col-12>
+      <ion-col col-12><h6 style="text-align: justify;">Para manter o bom relacionamento entre nossos clientes e amigos e retirar dúvidas sobre o desenvolvimento dos jogos esportivos o Simulador da I3 Esportes abaixo expõe sobre todas as condições para operações em nosso site. É recomendado a atualização constante sobre as nossa regras.</h6></ion-col>
+    </ion-row>
+    <ion-row col-12>
+      <ion-card *ngFor="let regra of listaRegras">
+        <ion-card-content style="padding: 0;">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12><p style="text-align: justify">{{regra}}</p></ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{opcaoCotacao?.descricao}}</ion-title>
+    <ion-buttons end>
+      <button ion-button [class]="bilhete.listaApostas.length == 0 ? 'bilhete-quantidade' : 'bilhete-quantidade-conteudo'" (click)="toBilhete()">
+        {{bilhete.listaApostas.length}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-grid>
+      <ion-row *ngFor="let itemCotacao of opcaoCotacao.listaItensCotacao" style="border-bottom: 1px solid #DDD">
+        <ion-col col-8 style="margin: auto">
+          {{itemCotacao.descricao}}
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button style="width: 100%" (click)="selecionaItemCotacao(itemCotacao)" [color]="buttonStyle(itemCotacao)">
+            {{itemCotacao.cotacao}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

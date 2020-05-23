@@ -1,0 +1,162 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()" color="light">Voltar</button>
+    </ion-buttons>
+    <ion-title>Cadastrar {{tipoBolao == 'BOLAO' ? 'Bolão' : 'Acumuladão'}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row class="rowBolao">
+      <ion-col col-12>
+        <ion-card>
+          <ion-card-header>
+            Dados do {{tipoBolao == 'BOLAO' ? 'Bolão' : 'Acumuladão'}}
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item>
+                  <ion-label color="primary" stacked>Título</ion-label>
+                  <ion-input color="primary" type="text" [(ngModel)]="titulo" name="titulo"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-12 *ngIf="tipoBolao != 'BOLAO'">
+                <ion-item class="checkboxPermissao">
+                  <ion-label stacked>Permitir Múltiplos Prêmios</ion-label>
+                  <ion-checkbox color="primary" [(ngModel)]="premioMultiplo" name="premioMultiplo" small></ion-checkbox>
+                </ion-item>
+              </ion-col>
+              <ion-col col-12>
+                <ion-item>
+                  <ion-label color="primary" stacked>Prêmio</ion-label>
+                  <ion-input color="primary" type="number" [(ngModel)]="premio" name="premio"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-12 *ngIf="premioMultiplo">
+                <ion-item>
+                  <ion-label color="primary" stacked>Segundo Prêmio</ion-label>
+                  <ion-input color="primary" type="number" [(ngModel)]="premio_dois" name="premio_dois"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-12 *ngIf="premioMultiplo && premio_dois > 0">
+                <ion-item>
+                  <ion-label color="primary" stacked>Terceiro Prêmio</ion-label>
+                  <ion-input color="primary" type="number" [(ngModel)]="premio_tres" name="premio_tres"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-12>
+              <ion-item>
+                <ion-label stacked>Valor do Bilhete do {{tipoBolao == 'BOLAO' ? 'Bolão' : 'Acumuladão'}}</ion-label>
+                <ion-input type="number" [(ngModel)]="valorBilhete"  name="valorBilhete"></ion-input>
+              </ion-item>
+              </ion-col>
+              <ion-col col-8>
+                <ion-item>
+                  <ion-label color="primary" stacked>Data de Encerramento</ion-label>
+                  <ion-datetime color="primary" displayFormat="DD/MM/YYYY" [(ngModel)]="dataEncerramento" name="dataEncerramento"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4>
+                <ion-item>
+                  <ion-label color="primary" stacked>Hora</ion-label>
+                  <ion-datetime color="primary" displayFormat="HH:mm" [(ngModel)]="horaEncerramento" name="horaEncerramento"></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="rowPartidabolao">
+      <ion-col col-12>
+        <ion-card>
+          <ion-card-header>
+            Dados da Partida
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item>
+                  <ion-label color="primary" stacked>Competição</ion-label>
+                  <ion-input color="primary" type="text" [(ngModel)]="competicao" name="competicao"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col col-6>
+                <ion-item>
+                  <ion-label color="primary" stacked>Time Casa</ion-label>
+                  <ionic-selectable item-content [(ngModel)]="timeCasa" itemValueField="id" itemTextField="nome" [items]="timeLista" [canSearch]="true">
+                  </ionic-selectable>
+                </ion-item>
+              </ion-col>
+
+              <ion-col col-6>
+                <ion-item>
+                  <ion-label color="primary" stacked>Time Fora</ion-label>
+                  <ionic-selectable item-content [(ngModel)]="timeFora" itemValueField="id" itemTextField="nome" [items]="timeLista" [canSearch]="true">
+                  </ionic-selectable>
+                </ion-item>
+              </ion-col>
+
+              <ion-col col-8>
+                <ion-item>
+                  <ion-label color="primary" stacked>Data da Partida</ion-label>
+                  <ion-datetime color="primary" displayFormat="DD/MM/YYYY" [(ngModel)]="dataEncerramentoPartida" name="dataEncerramentoPartida"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4>
+                <ion-item>
+                  <ion-label color="primary" stacked>Hora</ion-label>
+                  <ion-datetime color="primary" displayFormat="HH:mm" [(ngModel)]="horaEncerramentoPartida" name="horaEncerramentoPartida"></ion-datetime>
+                </ion-item>
+              </ion-col>
+
+              <ion-col col-12>
+                <button ion-button icon-left block full (click)="adicionarPartida()" color="primary" class="aposta-button">
+                  <ion-icon name="checkmark-circle"></ion-icon>Adicionar Partida
+                </button>
+              </ion-col>
+            </ion-row>
+
+            <ion-list class="listaPartidas" *ngIf="listaEvento && listaEvento.length > 0">
+              <span class="spanTitulo">Partidas</span>
+              <ion-row *ngFor="let evento of listaEvento; let last = last">
+                <ion-col col-12>
+                  <ion-card>
+                    <ion-card-content>
+                        <ion-row class="rowTop">
+                          <ion-col col-10>
+                            {{evento.timeCasa.nome}} x {{evento.timeFora.nome}}
+                            <br/>
+                            <span class="rowBottom">{{evento.dataFormatada}}</span>
+                          </ion-col>
+                          <ion-col col-2 *ngIf="last" style="margin: auto;">
+                            <button ion-button icon-only small full (click)="listaEvento.pop()"> <ion-icon name="trash"></ion-icon></button>
+                          </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button block full (click)="cadastrarBolao()" color="primary" class="aposta-button">Confirmar</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

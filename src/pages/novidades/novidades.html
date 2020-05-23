@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Novidades e Promoções</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="notificacoes">
+    <ion-card *ngFor="let notificacao of notificacoes">
+      <ion-card-header style="padding: 5px; float: right; font-size:12px; color: #4a8bfc;">
+          {{notificacao.data | date: 'dd/MM/yyyy'}}
+      </ion-card-header>
+      <ion-card-content style="padding: 0;">
+        <ion-grid style="padding: 0;">
+          <ion-row>
+            <ion-col col-12 style="padding: 0;"><img [src]="getImage(notificacao.id)"/></ion-col>
+            <ion-col col-12 style="font-size:20px; font-weight: bold;">{{notificacao.titulo}}</ion-col>
+            <ion-col col-12 style="text-align: justify">{{notificacao.descricaoBreve}}</ion-col>
+            <ion-col col-12><button ion-button clear style="text-transform: none; padding: 0;" (click)="toModal(notificacao)">Ver Mais...</button></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

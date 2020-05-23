@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>B. Pendentes</ion-title>
+    <ion-buttons end>
+      <button ion-button color="secondary" (click)="finalizarTodos()">
+        Finalizar Todos
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let bilhete of bilhetes">
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-9>
+            {{tipoBilhete(bilhete.tipoBilhete)}}
+            <br />
+            <span class="partida-subtitle" style="text-transform: uppercase">{{tipoApostaBilhete(bilhete.tipoAposta)}}</span>
+          </ion-col>
+          <ion-col col-3 style="padding-right: 0;">
+            <button ion-button icon-only (click)="printBilhete(bilhete)" style="float: right;"><ion-icon name="print"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="aposta-row">
+          <ion-col col-5 class="aposta-title">Código</ion-col>
+          <ion-col col-7 class="aposta-description">{{bilhete.id}}</ion-col>
+        </ion-row>
+        <ion-row class="aposta-row">
+          <ion-col col-5 class="aposta-title">Data</ion-col>
+          <ion-col col-7 class="aposta-description">{{bilhete.dataFormatada}}</ion-col>
+        </ion-row>
+        <ion-row class="aposta-row">
+          <ion-col col-5 class="aposta-title">Valor</ion-col>
+          <ion-col col-7 class="aposta-description">{{bilhete.valor}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <button ion-button (click)="verApostas(bilhete)" color="secondary" class="aposta-button"> Ver Apostas </button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <button ion-button (click)="finalizarBilhete(bilhete)" color="primary" class="aposta-button"> Finalizar </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

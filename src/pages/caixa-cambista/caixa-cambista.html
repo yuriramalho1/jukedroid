@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="voltar()" color="botaoVoltar">Voltar</button>
+    </ion-buttons>
+    <ion-title>Detalhamento da {{isPremiacoes ? 'Premiação' : 'Comissão'}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <h3 *ngIf="!isPremiacoes">Cambista: {{resumoCambista.usuario.nome}}</h3>
+
+  <!-- <ion-searchbar placeholder="Código do Bilhete" (ionInput)="filterItems($event)"></ion-searchbar> -->
+
+  <ion-card *ngFor="let lancamento of resumoCambista.lancamentos">
+    <ion-card-content style="padding: 0;">
+      <ion-grid style="padding: 0;">
+          <ion-row>
+            <ion-col col-12 class="{{tipoBilhete(lancamento.bilhete, true)}}" style="text-align: center;">
+              {{tipoBilhete(lancamento.bilhete)}}
+            </ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-3>
+              <ion-label class="labelUsuario">Código</ion-label>
+              <strong>{{lancamento.bilhete.id}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <ion-label class="labelUsuario">Data da Aposta</ion-label>
+              <strong>{{lancamento.bilhete.dataFormatada}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <ion-label class="labelUsuario">Status</ion-label>
+              <strong>{{statusFormatado(lancamento.bilhete)}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <ion-label class="labelUsuario">Valor</ion-label>
+              <strong>{{lancamento.bilhete.valor || 0 | currency : 'BRL'}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <ion-label class="labelUsuario">Possível Retorno</ion-label>
+              <strong>{{lancamento.bilhete.valorPossivelRetorno || 0 | currency : 'BRL'}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <ion-label class="labelUsuario">Tipo</ion-label>
+              <strong>{{descricaoAposta(lancamento.bilhete)}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <ion-label class="labelUsuario">Cliente</ion-label>
+              <strong>{{lancamento.bilhete.clienteNome}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <ion-label class="labelUsuario">Comissão</ion-label>
+              <strong>{{lancamento.valorComissao || 0 | currency : 'BRL'}}</strong>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="isPremiacoes">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button full block >Total: {{resumoCambista.totalPagamentoCliente || 0 | currency : 'BRL'}}</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,0 +1,93 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Todos as Simulações</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-card *ngFor="let s of simulacoes">
+      <ion-card-header>
+        <ion-grid style="padding-right: 0;">
+          <ion-row >
+            <ion-col col-9>
+              {{s.dataFormatada}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Tipo</ion-col>
+            <ion-col col-7 class="aposta-description">{{bs.tipoPartidaBilhete(s.tipoPartida)}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Cliente</ion-col>
+            <ion-col col-7 class="aposta-description">{{s.clienteNome != undefined ? s.clienteNome : s.usuario?.nome}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Simulação</ion-col>
+            <ion-col col-7 class="aposta-description">{{s.id}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Status</ion-col>
+            <ion-col col-7 class="aposta-description">{{statusFormatado(s)}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Valor</ion-col>
+            <ion-col col-7 class="aposta-description">{{s.valor || 0 | currency : 'BRL' : 'symbol'}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Possível Retorno</ion-col>
+            <ion-col col-7 class="aposta-description">{{s.valorPossivelRetorno||0 | currency : 'BRL' : 'symbol'}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-8 *ngIf="s.statusBilhete != 'FINALIZADO'">
+              <button ion-button (click)="verApostas(s)" icon-left color="primary" class="aposta-button">
+                <ion-icon class="fa-ticket icon-menu"></ion-icon> Ver apostas </button>
+            </ion-col>
+            <ion-col col-10 *ngIf="s.statusBilhete == 'FINALIZADO'">
+              <button ion-button (click)="verApostas(s)" icon-left color="primary" class="aposta-button">
+                <ion-icon class="fa-ticket icon-menu"></ion-icon> Ver apostas </button>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button (click)="imprimirBilhete(s)" icon-left color="primary" class="aposta-button" icon-only>
+                <ion-icon name="share"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button (click)="cancelarBilhete(s)" icon-left color="danger" class="aposta-button" *ngIf="s.statusBilhete != 'FINALIZADO' && s.statusBilhete != 'CANCELADO'" icon-only>
+                <ion-icon name="close"></ion-icon>
+              </button>
+            </ion-col>
+
+            <ion-col col-12>
+              <button ion-button (click)="finalizarSimulacao(s)" icon-left color="primary" class="aposta-button" icon-only full color="secondary">
+                <ion-icon name="checkmark-circle"></ion-icon>
+                Validar Simulação
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+
+  <ion-footer>
+    <ion-grid style="padding-top: 0; padding-bottom: 0;">
+      <ion-row>
+        <ion-col col-10>
+          <ion-item>
+            <ion-label stacked class="labelBuscar">Buscar</ion-label>
+            <ion-input type="number" [(ngModel)]="id"  name="id"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-2>
+          <button class="btnBuscar" ion-button icon-only icon-right round (click)="buscarSimulacao(id)"><ion-icon name="search" color="light"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-footer>

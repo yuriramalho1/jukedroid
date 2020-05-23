@@ -1,0 +1,22 @@
+page-mais-opcoes {
+    .label>.item>.item-inner{
+        font-size: 1.2rem;
+        border: 0px;
+    }
+    .label>.item>.item-inner>.input-wrapper>.label{
+        font-size: 1.2rem;
+        margin: 0px;
+    }
+    .label{
+        font-size: 1.2rem;
+        margin: 3px 0px 3px 0px;
+    }
+    .item-md{
+        padding-left: 0px;
+    }
+
+    .scroll-content,
+    .fixed-content{
+      margin-bottom: 0px !important;
+    }
+}

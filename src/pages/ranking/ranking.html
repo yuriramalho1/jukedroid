@@ -1,0 +1,106 @@
+<!--
+  Generated template for the RankingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="voltar()" color="light">Voltar</button>
+    </ion-buttons>
+    <ion-title>Ranking</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div>
+    <img src="assets/imgs/ranking.jpg" alt="top-ranking" />
+  </div>
+
+  <ion-label class="aposta-title">MINHA POSIÇÃO</ion-label>
+
+  <div class="linha">
+    <div class="posicaoBranco" style="background-color: transparent">
+
+    </div>
+    <ion-grid>
+      <ion-row style="font-weight: bold">
+        <ion-col col-5>
+          Nome
+        </ion-col>
+        <ion-col col-3 style="text-align: center">
+          Vitórias
+        </ion-col>
+        <ion-col col-4 style="text-align: center">
+          Cotação
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="linha">
+    <div [class]="usuario.posicao == 1 ? 'posicao posicao1' : 'posicao'">
+      {{usuario.posicao}}
+    </div>
+
+    <ion-grid>
+      <ion-row class="descricao">
+        <ion-col col-5>
+          {{usuario.apelido == '' || usuario.apelido == undefined ? usuario.nome : usuario.apelido}}
+        </ion-col>
+        <ion-col col-3 style="text-align: center">
+          {{usuario.numeroVitorias}}
+        </ion-col>
+        <ion-col col-4 style="text-align: center">
+          {{usuario.cotacaoTotalVitorias}},00
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-label class="aposta-title">RANKING - OS MELHORES</ion-label>
+
+  <div class="linha">
+      <div class="posicaoBranco" style="background-color: transparent">
+
+      </div>
+      <ion-grid>
+        <ion-row style="font-weight: bold">
+          <ion-col col-5>
+            Nome
+          </ion-col>
+          <ion-col col-3 style="text-align: center">
+            Vitórias
+          </ion-col>
+          <ion-col col-4 style="text-align: center">
+            Cotação
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="linha" *ngFor="let us of ranking">
+      <div [class]="us.posicao == 1 ? 'posicao posicao1' : 'posicao'">
+        {{us.posicao}}
+      </div>
+
+      <ion-grid>
+        <ion-row class="descricao">
+          <ion-col col-5>
+            {{us.apelido == '' || us.apelido == undefined ? us.nome : us.apelido}}
+          </ion-col>
+          <ion-col col-3 style="text-align: center">
+            {{us.numeroVitorias}}
+          </ion-col>
+          <ion-col col-4 style="text-align: center">
+            {{us.cotacaoTotalVitorias | number:'1.2-2':'pt-BR'}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+</ion-content>

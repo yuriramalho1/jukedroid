@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cliente Sem Cadastro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label stacked>Nome do Cliente</ion-label>
+    <ion-input type="text" [(ngModel)]="nome" name="nome"></ion-input>
+  </ion-item>  
+</ion-content>
+<ion-footer no-shadow>
+  <ion-toolbar position="bottom">
+    <button ion-item full (click)="salvarBilhete()" color="primary" class="button-noborder">
+      Salvar Bilhete
+    </button>
+  </ion-toolbar>
+</ion-footer>

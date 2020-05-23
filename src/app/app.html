@@ -1,0 +1,192 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color="menu-background">
+      <ion-buttons start>
+        <!-- <button ion-button icon-only color="menu-text">
+          <ion-icon name="contact"></ion-icon>
+        </button> -->
+      </ion-buttons>
+      <div class="menu-usuario" *ngIf="this.us.usuario.id">
+        <span class="nome">{{us.usuario?.nome}}</span>
+        <span class="email">{{us.usuario?.email}}</span>
+        <span class="saldo">{{us.usuario?.tipoUsuario != 'CLIENTE' ? 'Limite:' : 'Saldo:'}}
+          <span class="saldo-valor">{{(us.usuario?.tipoUsuario != 'CLIENTE' ? (us.usuario?.conta?.saldoLimite || 0) : (us.usuario?.conta?.saldo || 0)) | currency:'BRL':"symbol"}}</span>
+        </span>
+      </div>
+      <ion-buttons end>
+        <button menuClose ion-button icon-only color="menu-text" (click)="openImpressora()">
+          <ion-icon name="print"></ion-icon>
+        </button>
+        <button menuClose ion-button icon-only color="menu-text" (click)="openPerfil()" *ngIf="this.us.usuario.id">
+          <ion-icon name="cog"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item-divider color="menu-text">Scobet's</ion-item-divider>
+
+      <button menuClose ion-item (click)="openJogos('Futebol')" >
+        <ion-icon class="icon-menu" name="football"></ion-icon>
+        <span class="text-menu">Futebol</span>
+      </button>
+
+      <button menuClose ion-item (click)="openAoVivo()"  *ngIf="id_banca != 2 && visualizarAoVivo()">
+        <ion-icon class="icon-menu" name="globe"></ion-icon>
+        <span class="text-menu">Futebol Ao Vivo</span>
+      </button>
+
+      <button menuClose ion-item (click)="openJogos('Tênis')" *ngIf="id_banca != 2 && visualizarTenis()">
+        <ion-icon class="icon-menu" name="tennisball"></ion-icon>
+        <span class="text-menu">Tênis</span>
+      </button>
+
+      <button menuClose ion-item (click)="openJogos('Vôlei')"  *ngIf="1 == 0">
+        <ion-icon class="icon-menu" name="football"></ion-icon>
+        <span class="text-menu">Vôlei</span>
+      </button>
+
+      <button menuClose ion-item (click)="openJogos('Combate')" *ngIf="id_banca != 2 && visualizarCombate()">
+        <i><img src="assets/imgs/combate.png" width="16px" height="16px"/></i>
+        <span class="text-menu">Combate</span>
+      </button>
+
+      <button menuClose ion-item (click)="openNovidades()">
+        <ion-icon name="notifications"></ion-icon>
+        <span class="text-menu">Notificações</span>
+
+        <ion-badge color="secondary" item-end *ngIf="ns.novidadesNaoVisualizadas > 0">{{ns.novidadesNaoVisualizadas}}</ion-badge>
+      </button>
+
+
+      <button menuClose ion-item (click)="openConsultarBilhete()">
+        <ion-icon name="search" class="icon-menu"></ion-icon>
+        <span class="text-menu">Consultar Bilhete</span>
+      </button>
+
+      <ion-item-divider color="menu-text" *ngIf="this.us.usuario.id">Financeiro</ion-item-divider>
+
+      <button menuClose ion-item (click)="openCredito()" *ngIf="isAdmin() || this.us.usuario.tipoUsuario == 'GERENTE'">
+        <ion-icon class="fa-dollar icon-menu"></ion-icon>
+        <span class="text-menu">Crédito</span>
+      </button>
+
+      <button menuClose ion-item (click)="openFatura()" *ngIf="this.us.usuario.tipoUsuario == 'CAMBISTA' && id_banca != 2">
+        <ion-icon name="list-box" class="icon-menu"></ion-icon>
+        <span class="text-menu">Fatura</span>
+      </button>
+
+      <button menuClose ion-item (click)="openTransacao()" *ngIf="this.us.usuario.id">
+        <ion-icon class="fa-dollar icon-menu"></ion-icon>
+        <span class="text-menu">Adicionar Crédito</span>
+      </button>
+
+      <button menuClose ion-item (click)="openExtrato()" *ngIf="this.us.usuario.id && bancaService.banca.focoFutebol">
+        <ion-icon name="cash" class="icon-menu"></ion-icon>
+        <span class="text-menu">Extrato</span>
+      </button>
+
+      <button menuClose ion-item (click)="openMeusBilhetes()" *ngIf="this.us.usuario.id">
+        <ion-icon class="fa-ticket icon-menu"></ion-icon>
+        <span class="text-menu">Bilhetes</span>
+      </button>
+
+      <button menuClose ion-item (click)="openSaque()" *ngIf="this.us.usuario.id">
+        <ion-icon name="open" class="icon-menu"></ion-icon>
+        <span class="text-menu">Saque</span>
+      </button>
+
+      <button menuClose ion-item (click)="openClientes()" *ngIf="this.us.usuario.tipoUsuario == 'CAMBISTA' && id_banca != 2">
+        <ion-icon name="person" class="icon-menu"></ion-icon>
+        <span class="text-menu">Meus Clientes</span>
+      </button>
+
+      <ion-item-divider color="menu-text" *ngIf="isAdmin()">Administração</ion-item-divider>
+
+      <button menuClose ion-item (click)="openGerente()" *ngIf="this.us.usuario.tipoUsuario == 'GERENTE'">
+        <ion-icon name="person" class="icon-menu"></ion-icon>
+        <span class="text-menu">Meus Cambistas</span>
+      </button>
+
+      <button menuClose ion-item (click)="openGerenciarAoVivo()" *ngIf="isAdmin() && id_banca != 2 && bancaService.banca.focoFutebol">
+        <ion-icon class="icon-menu" name="globe"></ion-icon>
+        <span class="text-menu">Gerenciar Ao Vivo</span>
+      </button>
+
+      <button menuClose ion-item (click)="openMeuCaixa()" *ngIf="isAdmin()">
+        <ion-icon name="home" class="icon-menu"></ion-icon>
+        <span class="text-menu">Caixa(Apuração) da Banca</span>
+      </button>
+
+      <button menuClose ion-item (click)="openCaixa()" *ngIf="this.us.usuario.id && isNotCliente()">
+        <ion-icon name="briefcase" class="icon-menu"></ion-icon>
+        <span class="text-menu">Caixa (Apuração)</span>
+      </button>
+
+      <button menuClose ion-item (click)="openSimulacaoAdmin()" *ngIf="this.us.usuario.id && isNotCliente()">
+        <ion-icon name="cloud-circle" class="icon-menu"></ion-icon>
+        <span class="text-menu">Todos as Simulações (Pré-Aposta)</span>
+      </button>
+
+      <button menuClose ion-item (click)="openTodosBilhetes()" *ngIf="isAdmin()">
+        <ion-icon class="fa-ticket icon-menu"></ion-icon>
+        <span class="text-menu">Todos os Bilhetes</span>
+      </button>
+
+
+
+      <button menuClose ion-item (click)="openSolicitacoes()" *ngIf="isAdmin()">
+        <ion-icon name="megaphone" class="icon-menu"></ion-icon>
+        <span class="text-menu">Solicitações</span>
+      </button>
+
+      <button menuClose ion-item (click)="openUsuarios()" *ngIf="isAdmin()">
+        <ion-icon name="people" class="icon-menu"></ion-icon>
+        <span class="text-menu">Usuarios</span>
+      </button>
+
+      <button menuClose ion-item (click)="openConfiguracao()" *ngIf="isAdmin()">
+        <ion-icon name="construct" class="icon-menu"></ion-icon>
+        <span class="text-menu">Configurações Personalizadas</span>
+      </button>
+
+      <button menuClose ion-item (click)="openConfigBanca()" *ngIf="isAdmin()">
+        <ion-icon name="build" class="icon-menu"></ion-icon>
+        <span class="text-menu">Configurações da Banca</span>
+      </button>
+
+      <ion-item-divider color="menu-text"></ion-item-divider>
+
+      <button menuClose ion-item (click)="openSuporte()">
+        <ion-icon name="call" class="icon-menu"></ion-icon>
+        <span class="text-menu">Fale Conosco</span>
+      </button>
+
+      <button menuClose ion-item (click)="imprimir()">
+        <ion-icon name="print" class="icon-menu"></ion-icon>
+        <span class="text-menu">Imprimir Jogos do Dia</span>
+      </button>
+
+      <button menuClose ion-item (click)="downloadAPK()">
+        <ion-icon name="download" class="icon-menu"></ion-icon>
+        <span class="text-menu">Baixar APK</span>
+      </button>
+
+      <button menuClose ion-item (click)="sair()" *ngIf="this.us.usuario.id">
+        <ion-icon name="log-out" class="icon-menu"></ion-icon>
+        <span class="text-menu">Sair</span>
+      </button>
+
+      <button class="text-rodape" menuClose ion-item (click)="dialogI3()">
+        <span><i>Scobet's</i></span>
+      </button>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

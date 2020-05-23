@@ -1,0 +1,95 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="voltar()" color="botaoVoltar">Voltar</button>
+    </ion-buttons>
+    <ion-title>{{tipoModal == 1 ? 'Alterar Configuração' : 'Adicionar Configuração'}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <form *ngIf="configuracao" (ngSubmit)="salvarConfiguracao()">
+    <ion-grid>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Nome</ion-label>
+          <ion-input type="text"  name="configuracao" [(ngModel)]="configuracao.nome"></ion-input>
+        </ion-item>
+
+        <ion-item class="checkboxPermissao">
+          <ion-label stacked>Permitir que usuários Gerentes Cambistas e Clientes cancelem Bilhete</ion-label>
+          <ion-checkbox color="primary" [(ngModel)]="configuracao.permissaoCancelarBilhete" name="permissaoCancelarBilhete" small></ion-checkbox>
+        </ion-item>
+
+        <ion-item class="checkboxPermissao">
+          <ion-label stacked>Permitir que Usuários Gerentes alterem Saldo Limite</ion-label>
+          <ion-checkbox color="primary" [(ngModel)]="configuracao.permissaoAlterarSaldoLimite" name="permissaoAlterarSaldoLimite" small></ion-checkbox>
+        </ion-item>
+
+        <ion-item class="checkboxPermissao">
+          <ion-label stacked>Configuração Principal</ion-label>
+          <ion-checkbox color="primary" [(ngModel)]="configuracao.configuracaoPrincipal" name="configuracaoPrincipal" small></ion-checkbox>
+        </ion-item>
+
+        <ion-item col-6>
+          <ion-label stacked>Tempo limite para cancelamento do bilhete</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.tempoLimiteCancelamentoBilhete"  name="tempoLimiteCancelamentoBilhete"></ion-input>
+        </ion-item>
+        <ion-item col-6>
+          <ion-label stacked>Quantidade de Bilhetes Iguais por Usuário</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.qtdBilhetesIguaisPorUsuario"  name="qtdBilhetesIguaisPorUsuario"></ion-input>
+        </ion-item>
+
+        <ion-item col-6>
+          <ion-label stacked>Prêmio Máximo</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.premioMaxCupom"  name="premioMaximo"></ion-input>
+        </ion-item>
+        <ion-item col-6>
+          <ion-label stacked>Limite da Cotação</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.limiteCotacao"  name="limiteCotacao"></ion-input>
+        </ion-item>
+
+        <ion-item col-6>
+          <ion-label stacked>Valor Mínimo da Aposta</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.valorMinCupom" name="valorMinimoAposta"></ion-input>
+        </ion-item>
+        <ion-item col-6>
+          <ion-label stacked>Valor Máximo da Aposta</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.valorMaxCupom"  name="valorMaximoAposta"></ion-input>
+        </ion-item>
+
+        <ion-item col-6>
+          <ion-label stacked>Mínimo de Partidas por Bilhete</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.minimoPartidaBilhete"  name="minPartidasBilhete"></ion-input>
+        </ion-item>
+        <ion-item col-6>
+          <ion-label stacked>Valor máximo bilhete única partida</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.limitePartidaUnicaBilhete"  name="valorMaximoBilheteUnicaPartida"></ion-input>
+        </ion-item>
+
+        <ion-item col-6>
+          <ion-label stacked>Valor Máximo de Aposta (Ao Vivo)</ion-label>
+          <ion-input type="number" [(ngModel)]="configuracao.valorMaximoApostaAoVivo"  name="valorMaximoApostaAoVivo"></ion-input>
+        </ion-item>
+
+
+        <ion-item col-12>
+         <ion-label stacked>
+            <span style="font-size: 18px;">Cotação (Pré-Jogo)</span>
+            <ion-badge color="secondary" item-end style="float:right;">{{configuracao.porcentagemOdds == 0 ? 'Normal' : configuracao.porcentagemOdds}}</ion-badge>
+        </ion-label>
+         <ion-range min="-100" max="100" step="1" snaps="true" [(ngModel)]="configuracao.porcentagemOdds" name="porcentagemOdds">
+           <ion-icon small range-left name="remove"></ion-icon>
+           <ion-icon range-right name="add"></ion-icon>
+         </ion-range>
+       </ion-item>
+      </ion-row>
+    </ion-grid>
+
+    <div>
+      <button ion-button color="primary" type="submit" full block>{{tipoModal == 1 ? 'Alterar' : 'Adicionar'}}</button>
+    </div>
+  </form>
+</ion-content>

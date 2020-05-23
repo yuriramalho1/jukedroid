@@ -1,0 +1,95 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Consultar Bilhete</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-card>
+      <ion-card-content style="padding: 0;">
+        <ion-grid class="legendas">
+          <ion-row>
+            <ion-col col-1 class="legenda verde">&nbsp;</ion-col>
+            <ion-col col-3>Vencedor</ion-col>
+            <ion-col col-1 class="legenda azul">&nbsp;</ion-col>
+            <ion-col col-3>Cancelado</ion-col>
+            <ion-col col-1 class="legenda vermelho">&nbsp;</ion-col>
+            <ion-col col-3>Perdedor</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="bilhete.id">
+      <ion-row>
+        <ion-col col-12 class="{{bs.tipoBilhete(bilhete, true)}}">{{bs.tipoBilhete(bilhete)}}</ion-col>
+      </ion-row>
+      <ion-card-header>
+        <ion-grid style="padding-right: 0;">
+          <ion-row >
+            <ion-col col-9>
+              {{bilhete.dataFormatada}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Vendedor</ion-col>
+            <ion-col col-7 class="aposta-description">{{bilhete.usuario?.nome}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Cliente</ion-col>
+            <ion-col col-7 class="aposta-description">{{bilhete.clienteNome != undefined ? bilhete.clienteNome : bilhete.usuario?.nome}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Código</ion-col>
+            <ion-col col-7 class="aposta-description">{{bilhete.id}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Status</ion-col>
+            <ion-col col-7 class="aposta-description">{{statusFormatado(bilhete)}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Valor</ion-col>
+            <ion-col col-7 class="aposta-description">{{bilhete.valor || 0 | currency : 'BRL' : 'symbol'}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Possível Retorno</ion-col>
+            <ion-col col-7 class="aposta-description">{{bilhete.valorPossivelRetorno||0 | currency : 'BRL' : 'symbol'}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-10>
+              <button ion-button (click)="verApostas(bilhete)" icon-left color="primary" class="aposta-button">
+                <ion-icon class="fa-ticket icon-menu"></ion-icon> Ver apostas </button>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button (click)="shareBilhete(bilhete)" icon-left color="primary" class="aposta-button" icon-only>
+                <ion-icon name="share"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+
+  <ion-footer>
+    <ion-grid style="padding-top: 0; padding-bottom: 0;">
+      <ion-row>
+        <ion-col col-10>
+          <ion-item>
+            <ion-label stacked class="labelBuscar">Buscar</ion-label>
+            <ion-input type="number" [(ngModel)]="id"  name="id"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-2>
+          <button class="btnBuscar" ion-button icon-only icon-right round (click)="buscarBilhete(id)"><ion-icon name="search" color="light"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-footer>

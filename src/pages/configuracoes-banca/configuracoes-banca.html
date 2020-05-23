@@ -1,0 +1,111 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Configuração da Banca</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form *ngIf="banca">
+    <ion-grid>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Banca</ion-label>
+          <ion-input type="text"  name="banca" [(ngModel)]="banca.nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Proprietário</ion-label>
+          <ion-input type="text" [(ngModel)]="banca.proprietario"  name="proprietario"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>E-mail Proprietário</ion-label>
+          <ion-input type="text" [(ngModel)]="banca.email_proprietario"  name="emailProprietario"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>E-mail Alerta</ion-label>
+          <ion-input type="text" [(ngModel)]="banca.email_alerta"  name="emailAlerta"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Dia da Semana para Fechar o Caixa</ion-label>
+          <ion-select [(ngModel)]="banca.diaDaSemanaFecharCaixa" placeholder="Selecione..." interface="action-sheet" name="diaDaSemanaFecharCaixa">
+            <ion-option value="DOMINGO">Domingo</ion-option>
+            <ion-option value="SEGUNDA">Segunda-Feira</ion-option>
+            <ion-option value="TERCA">Terça-Feira</ion-option>
+            <ion-option value="QUARTA">Quarta-Feira</ion-option>
+            <ion-option value="QUINTA">Quinta-Feira</ion-option>
+            <ion-option value="SEXTA">Sexta-Feira</ion-option>
+            <ion-option value="SABADO">Sábado</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Celular</ion-label>
+          <ion-input type="text" [(ngModel)]="banca.telefone"  name="telefone"></ion-input>
+        </ion-item>
+
+        <ion-item class="checkboxPermissao" *ngIf="banca.vizualizarParametrosModalidade">
+          <ion-label stacked>Foco em Futebol</ion-label>
+          <ion-checkbox color="primary" [(ngModel)]="banca.focoFutebol" name="focoFutebol" small></ion-checkbox>
+        </ion-item>
+
+        <ion-item class="checkboxPermissao" *ngIf="banca.vizualizarParametrosModalidade">
+          <ion-label stacked>Foco em Acumuladão</ion-label>
+          <ion-checkbox color="primary" [(ngModel)]="banca.focoBolao" name="focoBolao" small></ion-checkbox>
+        </ion-item>
+
+        <ion-item class="checkboxPermissao" *ngIf="banca.vizualizarParametrosModalidade">
+          <ion-label stacked>Foco em Binário</ion-label>
+          <ion-checkbox color="primary" [(ngModel)]="banca.focoBinario" name="focoBinario" small></ion-checkbox>
+        </ion-item>
+
+        <ion-item *ngIf="banca.focoBinario">
+          <ion-label stacked>Descrição do Jogo Binário</ion-label>
+          <ion-input type="text" [(ngModel)]="banca.descricaoBinario"  name="descricaoBinario"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="banca.focoFutebol">
+          <ion-label>Enviar e-mails comerciais ?</ion-label>
+          <ion-toggle [(ngModel)]="banca.enviarEmailMarketing"  name="enviarEmailMarketing"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="banca.focoFutebol">
+          <ion-label>Pagamento de Bilhetes Vencedores Automático</ion-label>
+          <ion-toggle [(ngModel)]="banca.pagamentoBilheteAutomatico"  name="pagamentoBilheteAutomatico"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="banca.focoFutebol">
+          <ion-label>Suspender Apostas Pré-Jogo</ion-label>
+          <ion-toggle [(ngModel)]="banca.atualizandoPartidas"  name="atualizandoPartidas"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="banca.focoFutebol">
+          <ion-label>Suspender Apostas Ao Vivo</ion-label>
+          <ion-toggle [(ngModel)]="banca.suspenderAoVivo"  name="suspenderAoVivo"></ion-toggle>
+        </ion-item>
+
+        <ion-item col-12 *ngIf="banca.focoFutebol">
+         <ion-label stacked>
+            <span style="font-size: 18px;">Cotação (Pré-Jogo)</span>
+            <ion-badge color="secondary" item-end style="float:right;">{{banca.porcentagemOdds == 0 ? 'Normal' : banca.porcentagemOdds}}</ion-badge>
+        </ion-label>
+         <ion-range min="-100" max="100" step="1" snaps="true" [(ngModel)]="banca.porcentagemOdds" name="porcentagemOdds">
+           <ion-icon small range-left name="remove"></ion-icon>
+           <ion-icon range-right name="add"></ion-icon>
+         </ion-range>
+       </ion-item>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <button color="secondary" ion-button block full large (click)="clickAtualizar()" >Aplicar</button>
+</ion-footer>

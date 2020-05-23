@@ -1,0 +1,145 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{tipoBolao == 'BOLAO' ? 'Bolão' : 'Acumuladão'}}</ion-title>
+  </ion-navbar>
+
+  <div style="background-color: #000;" *ngIf="!this.us.usuario.id">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6><button ion-button full style="background-color: gray" (click)="toCadastro()">Cadastre-se</button></ion-col>
+        <ion-col col-6><button ion-button full color="secondary" (click)="toLogin()">Entrar</button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-segment [(ngModel)]="tipoLista" scrollable="true" (ionChange)="consultarAcumuladao(tipoBolao, tipoLista == '1')">
+    <ion-segment-button value="0">
+      <span>Disponíveis</span>
+    </ion-segment-button>
+
+    <ion-segment-button value="1">
+      <span>Encerrados</span>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid *ngIf="us.isAdmin() && tipoLista == '0'">
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button icon-left (click)="toCadastroBolao()" color="secondary" class="aposta-button">
+          <ion-icon name="add-circle"></ion-icon>Novo {{tipoBolao == 'BOLAO' ? 'Bolão' : 'Acumuladão'}}
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="tipoLista == '0'">
+    <ion-card *ngFor="let bolao of listaBolaoAtivo">
+      <ion-card-content>
+        <ion-grid style="padding:  0;">
+          <ion-row *ngIf="us.isAdmin()" style="background-color: #dbe0e4">
+            <span style="margin-left: 5px;">
+              <i><img [src]="getImageBolaoAtivo()" style="width: 20px"/></i>
+            </span>
+            <ion-col col-9 style="padding: 0 5px;"><b>{{bolao.titulo}}</b></ion-col>
+            <ion-col col-2 (click)="toEditarBolao(bolao)" style="padding: 0 5px;">
+              <ion-icon name="cog" style="float: right;"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-row class="rowTop">
+                <ion-col col-8>Primeiro Prêmio</ion-col>
+                <ion-col col-4>{{bolao.premio | currency : 'BRL' }}</ion-col>
+              </ion-row>
+              <ion-row class="rowTop" *ngIf="bolao.premio_dois > 0">
+                <ion-col col-8>Segundo Prêmio</ion-col>
+                <ion-col col-4>{{bolao.premio_dois | currency : 'BRL' }}</ion-col>
+              </ion-row>
+              <ion-row class="rowTop" *ngIf="bolao.premio_tres > 0">
+                <ion-col col-8>Terceiro Prêmio</ion-col>
+                <ion-col col-4>{{bolao.premio_tres | currency : 'BRL' }}</ion-col>
+              </ion-row>
+              <ion-row class="rowBottom">
+                <ion-col col-8><b>Data de Cadastro</b> <br/> {{bolao.dataFormatadaCadastro}}</ion-col>
+                <ion-col col-4><b>Status</b> <br/> {{bolaoService.statusBilhete(bolao.statusBolao)}}</ion-col>
+              </ion-row>
+              <ion-row class="rowBottom">
+                <ion-col col-8><b>Data de Encerramento</b> <br/> {{bolao.dataFormatada}}</ion-col>
+                <ion-col col-4><b>Qtd. Partidas</b> <br/> {{(bolao.listaEvento ? bolao.listaEvento.length : 0)}} Partidas</ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12 style="padding-bottom: 0;">
+              <button ion-button icon-left color="dinheiro" class="aposta-button" (click)="toRodada(bolao)">
+                <ion-icon class="fa-ticket icon-menu"></ion-icon>Bilhete
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12 style="padding-bottom: 0;">
+              <button ion-button icon-left class="aposta-button botaoPalpites" (click)="toPalpiteBolao(bolao)">
+                <ion-icon class="fa-ticket icon-menu"></ion-icon>Todos os Palpites
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="us.isAdmin()">
+            <ion-col col-12 style="padding-top: 0;">
+              <button ion-button icon-left (click)="desativarBolao(bolao)" color="danger" class="aposta-button">
+                <ion-icon name="trash"></ion-icon>Encerrar {{tipoBolao == 'BOLAO' ? 'Bolão' : 'Acumuladão'}}
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-list *ngIf="tipoLista == '1'">
+    <ion-card *ngFor="let bolao of listaBolaoEncerrado">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-2 style="margin: auto;">
+              <i><img [src]="getImage(bolao)" width="16px"/></i>
+            </ion-col>
+            <ion-col col-10>
+              <ion-row class="rowTop">
+                <ion-col col-8>{{bolao.titulo}}</ion-col>
+                <ion-col col-4>{{bolao.premio | currency : 'BRL' }}</ion-col>
+              </ion-row>
+              <ion-row class="rowBottom">
+                <ion-col col-8><b>Data de Cadastro</b> <br/> {{bolao.dataFormatada}}</ion-col>
+                <ion-col col-4><b>Status</b> <br/> {{bolaoService.statusBilhete(bolao.statusBolao)}}</ion-col>
+              </ion-row>
+              <ion-row class="rowBottom">
+                <ion-col col-8><b>Data de Encerramento</b> <br/> {{bolao.dataFormatada}}</ion-col>
+                <ion-col col-4 (click)="toRodada(bolao, true)"><b>Qtd. Partidas</b> <br/> {{(bolao.listaEvento ? bolao.listaEvento.length : 0)}} Partidas</ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12 style="padding-bottom: 0;">
+              <button ion-button icon-left class="aposta-button botaoPalpites" (click)="toPalpiteBolao(bolao)">
+                <ion-icon class="fa-ticket icon-menu"></ion-icon>Palpites
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="bolao.statusBolao == 'CONCLUIDO'">
+            <ion-col col-12 style="padding-bottom: 0;">
+              <button ion-button icon-left class="aposta-button botaoVencedores" (click)="toVencedoresBolao(bolao)">
+                <ion-icon name="medal"></ion-icon>Vencedores
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,68 @@
+page-home-sm {
+  .content{
+      background-color: color($colors, background-app, base)
+  }
+
+  h6{
+    color: #2f4050;
+    text-align: center;
+    line-height: 2em;
+    text-transform: uppercase;
+    border-bottom: solid 1px;
+  }
+
+  .competicaoAtiva{
+    color: color($colors, secondary, base)
+  }
+
+  .label>.item>.item-inner{
+      font-size: 1.4rem;
+      border: 0px;
+  }
+  .label>.item>.item-inner>.input-wrapper>.label{
+      font-size: 1.4rem;
+      margin: 0px;
+  }
+  .label{
+      font-size: 1.4rem;
+      margin: 3px 0px 3px 0px;
+  }
+  .item-md{
+      padding-left: 5px;
+  }
+  .gridAtivo{
+      background-color: #c7c7c7;
+  }
+
+  .scroll-content,
+  .fixed-content{
+    margin-bottom: 0px !important;
+  }
+
+  ion-card-header{
+    font-size: 1.5rem;
+    white-space: normal;
+  }
+
+  .aovivo-title{
+    font-size: 1.1rem;
+    color: color($colors, primary, base);
+    font-weight: bold;
+    white-space: normal;
+  }
+
+  .aovivo-subtitle{
+    font-size: 1rem;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .headerAoVivo{
+    padding: 0px 12px;
+    font-size: 1.1rem;
+  }
+
+  ion-button{
+    font-size: 1rem;
+  }
+}

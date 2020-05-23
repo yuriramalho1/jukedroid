@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Configurações Personalizadas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button (click)="adicionarConfiguracao()" icon-left color="primary" class="aposta-button">
+          <ion-icon name="add-circle"></ion-icon>Nova Configuração</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngFor="let config of listaConfiguracao">
+    <ion-card-content style="padding: 0;">
+      <ion-grid>
+        <ion-row *ngIf="config.configuracaoPrincipal">
+          <ion-col col-12 class="configPrincipal">
+            <strong>{{config.configuracaoPrincipal ? "Configuração Padrão" : ""}}</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6 style="margin: auto;">
+            <strong>{{config.nome}}</strong>
+          </ion-col>
+          <ion-col col-6>
+            <ion-row class="aposta-row">
+              <ion-col offset-3 col-3 class="botoesUsuario"><button ion-button icon-only small full (click)="vincularUsuarios(config)"> <ion-icon name="people"></ion-icon></button></ion-col>
+              <ion-col col-3 class="botoesUsuario"><button ion-button icon-only small full (click)="adicionarConfiguracao(1, config)"> <ion-icon name="create"></ion-icon></button></ion-col>
+              <ion-col col-3 class="botoesUsuario"><button ion-button icon-only small full (click)="deletarConfiguracao(config)"> <ion-icon name="trash"></ion-icon></button></ion-col>
+            </ion-row>
+          </ion-col>
+       </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

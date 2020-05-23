@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Solicitações de Transações</ion-title>
+      <ion-buttons end>
+        <button ion-button [class]="transacoesSelecionadas.length == 0 ? 'aposta-confirmar' : 'aposta-confirmar-conteudo'" (click)="confirmar()">
+          Confirmar
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-card *ngIf="transacoes">
+      <ion-card-content *ngIf="transacoes.length == 0">
+        <h4>Não há solicitações neste momento.</h4>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngFor="let transacao of transacoes">
+      <ion-card-header>
+        {{tipoTransacao(transacao)}}
+        <br/>
+        <span class="partida-subtitle" style="text-transform: uppercase">{{transacao.usuario.nome}}</span>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="aposta-row">
+            <ion-col col-4 class="aposta-title">CPF</ion-col>
+            <ion-col col-8 class="aposta-description">{{transacao.usuario.cpf}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-4 class="aposta-title">E-mail</ion-col>
+            <ion-col col-8 class="aposta-description">{{transacao.usuario.email}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-4 class="aposta-title">Telefone</ion-col>
+            <ion-col col-8 class="aposta-description">{{transacao.usuario.telefone}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-4 class="aposta-title">Data</ion-col>
+            <ion-col col-8 class="aposta-description">{{transacao.dataFormatada}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-4 class="aposta-title">Valor</ion-col>
+            <ion-col col-8 class="aposta-description">{{transacao.valor | currency : 'BRL'}}</ion-col>
+          </ion-row>
+           <ion-row>
+            <ion-col col-5>
+              <button ion-button (click)="adicionaTransacao(transacao,'CONCLUIDO')" color="dinheiro" class="aposta-button" [outline]="verificaTransacao(transacao,'CONCLUIDO')"> Confirmar </button>
+            </ion-col>
+            <ion-col col-5>
+              <button ion-button (click)="adicionaTransacao(transacao,'CANCELADO_PELO_ADMINISTRADOR')" color="danger" class="aposta-button" [outline]="verificaTransacao(transacao,'CANCELADO_PELO_ADMINISTRADOR')"> Cancelar </button>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button icon-only (click)="comprovante(transacao)" color="primary" class="aposta-button" [outline]="existeComprovante(transacao)">
+                <ion-icon name="image"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>

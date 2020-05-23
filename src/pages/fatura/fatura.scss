@@ -1,0 +1,40 @@
+page-fatura {
+  ion-grid b{
+    color: color($colors, primary, base);
+  }
+
+  .tipoMovimentacao{
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .tipoMovimentacao.verde{
+    text-align: left;
+    background-color: transparent;
+  }
+
+  .tipoMovimentacao.verde b,
+  .tipoMovimentacao.verde ion-icon{
+    color: #249827;
+  }
+
+  .tipoMovimentacao.vermelho{
+    text-align: left;
+    background-color: transparent;
+  }
+
+  .tipoMovimentacao.vermelho b,
+  .tipoMovimentacao.vermelho ion-icon{
+    color: #da3a3a;
+  }
+
+  .tipoMovimentacao.laranja{
+    text-align: left;
+    background-color: transparent;
+  }
+
+  .tipoMovimentacao.laranja b,
+  .tipoMovimentacao.laranja ion-icon{
+    color: #ea9c0b;
+  }
+}

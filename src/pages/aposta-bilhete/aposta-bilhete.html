@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Apostas</ion-title>
+    <ion-buttons end>
+      <button ion-button [class]="bilheteSelecionado.listaApostas.length == 0 ? 'bilhete-quantidade' : 'bilhete-quantidade-conteudo'">
+        {{bilheteSelecionado.listaApostas.length}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-card *ngFor="let aposta of bilheteSelecionado.listaApostas">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Competição</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.competicao}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Evento</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.evento}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Data do Evento</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.dataFormatada}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Tipo de Aposta</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.tipoAposta}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Escolha</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.escolha}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Cotação</ion-col>
+            <ion-col col-7 class="aposta-description">{{aposta.cotacaoAposta}}</ion-col>
+          </ion-row>
+          <ion-row class="aposta-row">
+            <ion-col col-5 class="aposta-title">Status</ion-col>
+            <ion-col col-7 class="aposta-description" [class]="statusApostaCss(aposta.statusAposta)">{{escreveStatus(aposta.statusAposta)}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,50 @@
+page-bolao-cadastro {
+  .rowPartidabolao ion-card,
+  .rowBolao ion-card{
+    margin: 0;
+    width: 100%;
+  }
+
+  .rowPartidabolao ion-card-header,
+  .rowBolao ion-card-header{
+    padding: 10px 10px 0;
+  }
+
+  .rowPartidabolao ion-card-content,
+  .rowBolao ion-card-content{
+    padding: 0;
+  }
+
+  .rowPartidabolao{
+    margin-top: 10px;
+  }
+
+  ion-card .item-inner{
+    border-bottom: 1px solid #dedede !important;
+  }
+
+  ion-card ion-col .item-md{
+    padding-left: 5px !important;
+  }
+
+  .listaPartidas .spanTitulo{
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .listaPartidas ion-card-content{
+    padding: 0 !important;
+  }
+
+  .listaPartidas .rowBottom{
+    font-size: 12px;
+  }
+
+  .rowTop ion-col{
+    padding: 2px 5px;
+  }
+}

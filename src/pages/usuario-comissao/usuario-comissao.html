@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="voltar()" color="botaoVoltar">Voltar</button>
+    </ion-buttons>
+    <ion-title>Comissões</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div padding>
+    <ion-segment [(ngModel)]="tipoComissao">
+      <ion-segment-button value="PRE_JOGO" *ngIf="bs.banca.focoFutebol">
+        Pré-Jogo
+      </ion-segment-button>
+      <ion-segment-button value="AO_VIVO" *ngIf="bs.banca.focoFutebol">
+        Ao Vivo
+      </ion-segment-button>
+      <ion-segment-button value="ACUMULADAO">
+        Acumuladão
+      </ion-segment-button>
+      <ion-segment-button value="BOLAO" *ngIf="bs.banca.vizualizarParametrosModalidade">
+        Bolão
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-card>
+    <ion-card-content style="padding: 0">
+      <ion-grid style="padding: 0">
+        <ion-row>
+          <ion-col col-5>
+            <ion-label color="primary" stacked style="white-space: normal; text-align: center;">Quantidade de Apostas</ion-label>
+            <ion-label style="white-space: normal; text-align: center;"><strong>{{(retornaListaComissao(tipoComissao).length + 1)}}</strong></ion-label>
+          </ion-col>
+          <ion-col col-5>
+            <ion-label color="primary" stacked style="white-space: normal">Percentual Da Comissão (%)</ion-label>
+            <ion-input color="primary" type="number" [(ngModel)]="percentualComissao" placeholder="0 %" name="percentualComissao" style="border-bottom: solid 1px #999;"></ion-input>
+          </ion-col>
+          <ion-col col-2 style="margin: auto 0; padding-left: 0">
+            <button ion-button (click)="salvarComissaoUsuario()" icon-only color="primary" class="aposta-button" ><ion-icon name="checkmark-circle"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <div [ngSwitch]="tipoComissao">
+    <h6 style="margin: 1.5em 0;">Comissões Cadastradas:</h6>
+    <ion-list *ngSwitchCase="'PRE_JOGO'">
+      <ion-grid class="comissao-grid">
+        <ion-row>
+          <ion-col col-5>Quantidade de Apostas</ion-col>
+          <ion-col col-4>Percentual da Comissão</ion-col>
+          <ion-col col-3 style="text-align: center;">Remover</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let comissao of listaComissaoPreJogo; let last = last">
+          <ion-col col-5 style="margin: auto">{{comissao.quantidadeApostas}}</ion-col>
+          <ion-col col-4 style="margin: auto">{{comissao.percentualComissao}}%</ion-col>
+          <ion-col col-3 style="margin: auto"><button *ngIf="last" ion-button icon-only small (click)="deletarUsuarioComissao(comissao)" style="display: block; margin: 0 auto;"><ion-icon name="trash"></ion-icon></button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'AO_VIVO'">
+      <ion-grid class="comissao-grid">
+        <ion-row>
+          <ion-col col-5>Quantidade de Apostas</ion-col>
+          <ion-col col-4>Percentual Da Comissão</ion-col>
+          <ion-col col-3 style="text-align: center;">Remover</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let comissao of listaComissaoAoVivo; let last = last">
+          <ion-col col-5 style="margin: auto">{{comissao.quantidadeApostas}}</ion-col>
+          <ion-col col-4 style="margin: auto">{{comissao.percentualComissao}}%</ion-col>
+          <ion-col col-3><button *ngIf="last" ion-button icon-only small (click)="deletarUsuarioComissao(comissao)" style="display: block; margin: 0 auto;"><ion-icon name="trash"></ion-icon></button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'ACUMULADAO'">
+      <ion-grid class="comissao-grid">
+        <ion-row>
+          <ion-col col-5>Quantidade de Apostas</ion-col>
+          <ion-col col-4>Percentual Da Comissão</ion-col>
+          <ion-col col-3 style="text-align: center;">Remover</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let comissao of listaComissaoAcumuladao; let last = last">
+          <ion-col col-5 style="margin: auto">{{comissao.quantidadeApostas}}</ion-col>
+          <ion-col col-4 style="margin: auto">{{comissao.percentualComissao}}%</ion-col>
+          <ion-col col-3><button *ngIf="last" ion-button icon-only small (click)="deletarUsuarioComissao(comissao)" style="display: block; margin: 0 auto;"><ion-icon name="trash"></ion-icon></button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'BOLAO'">
+      <ion-grid class="comissao-grid">
+        <ion-row>
+          <ion-col col-5>Quantidade de Apostas</ion-col>
+          <ion-col col-4>Percentual Da Comissão</ion-col>
+          <ion-col col-3 style="text-align: center;">Remover</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let comissao of listaComissaoBolao; let last = last">
+          <ion-col col-5 style="margin: auto">{{comissao.quantidadeApostas}}</ion-col>
+          <ion-col col-4 style="margin: auto">{{comissao.percentualComissao}}%</ion-col>
+          <ion-col col-3><button *ngIf="last" ion-button icon-only small (click)="deletarUsuarioComissao(comissao)" style="display: block; margin: 0 auto;"><ion-icon name="trash"></ion-icon></button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </div>
+</ion-content>

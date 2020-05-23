@@ -1,0 +1,80 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="voltar()" color="botaoVoltar">Voltar</button>
+    </ion-buttons>
+    <ion-title>Informações do Usuário</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid *ngIf="usuario">
+    <ion-row>
+      <ion-item>
+        <ion-label stacked>Nome</ion-label>
+        <ion-input type="text"  name="Nome" [(ngModel)]="usuario.nome"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Apelido</ion-label>
+        <ion-input type="text"  name="Nome" [(ngModel)]="usuario.apelido"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>E-mail</ion-label>
+        <ion-input type="text"  name="Nome" [(ngModel)]="usuario.email"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="escolheTipo">
+        <ion-label color="primary" stacked>Tipo do Usuário</ion-label>
+        <ion-select [(ngModel)]="usuario.tipoUsuario" placeholder="Selecione..." interface="action-sheet" name="tipoUsuario">
+          <ion-option value="CLIENTE">Cliente</ion-option>
+          <ion-option value="GERENTE">Gerente</ion-option>
+          <ion-option value="CAMBISTA">Cambista</ion-option>
+          <ion-option value="ADMINISTRADOR">Administrador</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="checkboxPermissao" *ngIf="us.usuario && us.usuario.banca.focoFutebol && (us.usuario.tipoUsuario == 'ADMINISTRADOR' || (us.usuario.tipoUsuario == 'GERENTE' && us.usuario.visualizaFutebol))">
+        <ion-label stacked>Permitir que Usuário Visualize Futebol </ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="usuario.visualizaFutebol" name="visualizaFutebol" small></ion-checkbox>
+      </ion-item>
+
+      <ion-item class="checkboxPermissao" *ngIf="us.usuario && us.usuario.banca.focoBolao && (us.usuario.tipoUsuario == 'ADMINISTRADOR' || (us.usuario.tipoUsuario == 'GERENTE' && us.usuario.visualizaBolao))">
+        <ion-label stacked>Permitir que Usuário Visualize Acumuladão</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="usuario.visualizaBolao" name="visualizaBolao" small></ion-checkbox>
+      </ion-item>
+
+      <ion-item class="checkboxPermissao" *ngIf="us.usuario && us.usuario.banca.focoFutebol && (us.usuario.tipoUsuario == 'ADMINISTRADOR' || (us.usuario.tipoUsuario == 'GERENTE' && us.usuario.visualizaAoVivo))">
+        <ion-label stacked>Permitir que Usuário Visualize Ao Vivo</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="usuario.visualizaAoVivo" name="visualizaAoVivo" small></ion-checkbox>
+      </ion-item>
+
+      <ion-item class="checkboxPermissao" *ngIf="us.usuario && us.usuario.banca.focoFutebol && (us.usuario.tipoUsuario == 'ADMINISTRADOR' || (us.usuario.tipoUsuario == 'GERENTE' && us.usuario.visualizaTenis))">
+        <ion-label stacked>Permitir que Usuário Visualize Tênis </ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="usuario.visualizaTenis" name="visualizaTenis" small></ion-checkbox>
+      </ion-item>
+
+      <ion-item class="checkboxPermissao" *ngIf="us.usuario && us.usuario.banca.focoFutebol && (us.usuario.tipoUsuario == 'ADMINISTRADOR' || (us.usuario.tipoUsuario == 'GERENTE' && us.usuario.visualizaCombate))">
+        <ion-label stacked>Permitir que Usuário Visualize Combate </ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="usuario.visualizaCombate" name="visualizaCombate" small></ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Celular</ion-label>
+        <ion-input type="text"  name="Nome" [(ngModel)]="usuario.celular"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Login</ion-label>
+        <ion-input type="text"  name="Nome" [(ngModel)]="usuario.login"></ion-input>
+      </ion-item>
+
+      <button ion-button full block color="primary" (click)="salvarUsuario()">Salvar Informações</button>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

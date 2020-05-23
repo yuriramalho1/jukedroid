@@ -1,0 +1,77 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Saque</ion-title>
+    <ion-buttons end>
+      <button ion-button [class]="bilhete.listaApostas.length == 0 ? 'bilhete-quantidade' : 'bilhete-quantidade-conteudo'" (click)="toBilhete()">
+        {{bilhete.listaApostas.length}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form (ngSubmit)="clickSacar()" novalidate *ngIf="conta">
+    <ion-grid>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Banco</ion-label>
+          <ion-select required="true" [(ngModel)]="conta.banco" placeholder="Selecione..." interface="action-sheet" name="banco">
+            <ion-option value="BANCO_DO_BRASIL">BANCO DO BRASIL</ion-option>
+            <ion-option value="CAIXA">CAIXA ECONÔMICA FEDERAL</ion-option>
+            <ion-option value="BRADESCO">BRADESCO</ion-option>
+            <ion-option value="SANTANDER_BANESPA_SA">SANTANDER</ion-option>
+            <ion-option value="HSBC_BANK_BRASIL_SA">HSBC</ion-option>
+            <ion-option value="ITAU">ITAÚ</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-row>
+      <ion-item>
+        <ion-label stacked>Tipo de Conta</ion-label>
+        <ion-select required="true" [(ngModel)]="conta.tipoConta" placeholder="Selecione..." interface="action-sheet" name="tipoConta">
+          <ion-option value="CONTA_CORRENTE">Conta Corrente</ion-option>
+          <ion-option value="CONTA_POUPANCA">Conta Poupança</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Agência (e digito, se houver)</ion-label>
+          <ion-input type="text" [(ngModel)]="conta.agencia" name="agencia" placeholder="XXXX-X" required="true"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row *ngIf="tipoBanco == 'CAIXA'">
+        <ion-item>
+          <ion-label stacked>Operação (se houver)</ion-label>
+          <ion-input type="text" [(ngModel)]="conta.operacao" name="operacao"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Conta(e digito, se houver)</ion-label>
+          <ion-input type="text" [(ngModel)]="conta.numeroConta" name="numeroConta" placeholder="XXXXXXX-X" required="true"></ion-input>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-item>
+          <ion-label stacked>Valor da retirada</ion-label>
+          <ion-input type="number" [(ngModel)]="valor" name="valor" placeholder="Mínimo de R$ 5,00"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button color="primary" type="submit" class="button-full">Sacar valor</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>
