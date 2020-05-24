@@ -23,6 +23,7 @@ import { PartidaService } from '../../service/partida.service';
 import { MaisOpcoesPage } from '../mais-opcoes/mais-opcoes';
 import { Util } from '../../providers/util';
 import { Regiao } from '../../model/regiao.model';
+import { File, DirectoryEntry, FileEntry, Entry } from '@ionic-native/file';
 
 @Component({
   selector: 'page-home',
@@ -61,7 +62,7 @@ export class HomePage {
               public bs : BilheteService, public us : UsuarioService, public rk : RankingService, private alertCtrl: AlertController,
               public navParams: NavParams, public tenisService : TenisService, public bancaService : BancaService,
               public configService: ConfiguracaoService, public loadCtrl: LoadingController, public toastCtrl: ToastController,
-              public ps: PartidaService) {
+              public ps: PartidaService, private file: File) {
 
     this.funcoesUtil = new Util();
 
@@ -157,6 +158,31 @@ export class HomePage {
         break;
       }
     }
+
+    // Example of use
+    this.listarDiretorios(this.file, '')
+    .then(filesList => {
+      filesList.forEach(path => {
+        console.log('Encontrado: ' + path);
+      })
+    })
+    .catch(err => console.log('Error listing directory'));
+    // End example of use
+  }
+
+  // List directory method
+  listarDiretorios(file: File, path: string): Promise<string[]> {
+    return new Promise(resolve => {
+      file.listDir(this.file.externalRootDirectory, path)
+      .then(entries => {
+        var fileDirList = [];
+        entries.forEach(fileDir => {
+          fileDirList.push(fileDir.fullPath);
+        })
+        resolve(fileDirList);
+      })
+      .catch(err => console.log('Directory doesn\'t exist'));
+    });
   }
 
   retornaCompeticoes(idRegiao: number): Competicao[]{
