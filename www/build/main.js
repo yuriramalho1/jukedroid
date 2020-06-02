@@ -186,7 +186,7 @@ var HomePage = /** @class */ (function () {
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"E:\Ambiente Ionic\jukedroid\src\pages\home\home.html"*/'<ion-content>\n\n</ion-content>\n\n\n'/*ion-inline-end:"E:\Ambiente Ionic\jukedroid\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"E:\Ambiente Ionic\jukedroid\src\pages\home\home.html"*/'<ion-content>\n  <ion-slides pager>\n    <ion-slide class="imgSlide">\n      <img src="assets/imgs/CAPA_1.jpg" style="height: 50vh;" />\n    </ion-slide>\n    <ion-slide class="imgSlide">\n      <img src="assets/imgs/CAPA_2.jpg" style="height: 50vh;" />\n    </ion-slide>\n    <ion-slide class="imgSlide">\n      <img src="assets/imgs/CAPA_3.jpg" style="height: 50vh;" />\n    </ion-slide>\n  </ion-slides>\n</ion-content>\n\n\n'/*ion-inline-end:"E:\Ambiente Ionic\jukedroid\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ModalController */], __WEBPACK_IMPORTED_MODULE_2__service_competicao_service__["a" /* CompeticaoService */],
             __WEBPACK_IMPORTED_MODULE_4__service_bilhete_service__["a" /* BilheteService */], __WEBPACK_IMPORTED_MODULE_5__service_usuario_service__["a" /* UsuarioService */], __WEBPACK_IMPORTED_MODULE_6__service_ranking_service__["a" /* RankingService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
