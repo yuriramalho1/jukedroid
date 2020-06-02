@@ -1,155 +1,22 @@
-page-home {
-  .scroll-content,
-  .fixed-content{
-    margin-bottom: 0px !important;
+page-login {
+  ion-content.content{
+      background-color:black;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      background-size: cover;
+      text-align: center;
   }
 
-  .listaRegioes ion-card{
-    margin: 0px 0px 10px 0px !important;
+  .text-input{
+      color: color($colors, login-text, base);
   }
 
-  .listaRegioes ion-card-header{
-    font-size: 1.5rem;
-    white-space: normal;
+  .logo-img{
+    content:url("../assets/imgs/logo.png");
+    height: auto;
+    
   }
 
-  .listaDestaques h6,
-  .listaTodasAsPartidas h6{
-    color: #2f4050;
-    text-align: center;
-    line-height: 2em;
-    text-transform: uppercase;
-    border-bottom: solid 1px;
-  }
-
-  .listaDestaques .competicaoAtiva,
-  .listaTodasAsPartidas .competicaoAtiva{
-    color: color($colors, secondary, base)
-  }
-
-  .listaDestaques .label>.item>.item-inner,
-  .listaTodasAsPartidas .label>.item>.item-inner{
-      font-size: 1.4rem;
-      border: 0px;
-  }
-
-  .listaDestaques .label>.item>.item-inner>.input-wrapper>.label,
-  .listaTodasAsPartidas .label>.item>.item-inner>.input-wrapper>.label{
-      font-size: 1.4rem;
-      margin: 0px;
-  }
-
-  .listaDestaques .label,
-  .listaTodasAsPartidas .label{
-      font-size: 1.4rem;
-      margin: 3px 0px 3px 0px;
-  }
-
-  .listaDestaques .item-md,
-  .listaTodasAsPartidas .item-md{
-      padding-left: 5px;
-  }
-
-  .listaDestaques .gridAtivo,
-  .listaTodasAsPartidas .gridAtivo{
-      background-color: #c7c7c7;
-  }
-
-  .listaDestaques .scroll-content,
-  .listaDestaques .fixed-content,
-  .listaTodasAsPartidas .scroll-content,
-  .listaTodasAsPartidas .fixed-content{
-    margin-bottom: 0px !important;
-  }
-
-  .listaDestaques ion-card-header,
-  .listaTodasAsPartidas ion-card-header{
-    font-size: 1.5rem;
-    white-space: normal;
-  }
-
-  .listaDestaques .aovivo-title,
-  .listaTodasAsPartidas .aovivo-title{
-    font-size: 1.1rem;
-    color: color($colors, primary, base);
-    font-weight: bold;
-    white-space: normal;
-  }
-
-  .listaDestaques .aovivo-subtitle,
-  .listaTodasAsPartidas .aovivo-subtitle{
-    font-size: 1rem;
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
-  .listaDestaques .headerAoVivo,
-  .listaTodasAsPartidas .headerAoVivo{
-    padding: 0px 12px;
-    font-size: 1.1rem;
-  }
-
-  .listaDestaques ion-button,
-  .listaTodasAsPartidas ion-button{
-    font-size: 1rem;
-  }
-
-  .listaDestaques .ultimoJogo{
-    margin-bottom: -10px;
-  }
-
-  .listaDestaques .primeiroJogo{
-    margin-top: -10px !important;
-  }
-
-  .listaDestaques .esporte-title,
-  .listaTodasAsPartidas .esporte-title{
-    margin-bottom: 0 !important;
-    padding: 10px 10px 5px;
-  }
-
-  .listaDestaques .slideDestaques{
-    background-color: #c7c7c7;
-  }
-
-  .listaDestaques .slideDestaques .swiper-wrapper{
-    height: 150px;
-  }
-
-  .listaDestaques .slideDestaques  ion-card{
-    color: color($colors, primary, base);
-  }
-
-  .listaDestaques .slideDestaques ion-card-header span{
-    color: color($colors, primary, base) !important;
-    font-size: 12px;
-  }
-
-  .listaDestaques .slideDestaques .rowButtons button{
-    height: 2.6em;
-  }
-
-  ion-segment-button{
-    padding: 0 4px !important;
-    text-transform: none !important;
-    text-overflow: unset !important;
-    height: 4.2rem !important;
-    line-height: 2rem !important;
-    white-space: normal !important;
-    max-width: 120px !important;
-  }
-
-  ion-segment-button span{
-    margin-top: 1em;
-    display: block;
-  }
-
-  ion-segment-button.centered{
-    max-width: 80px !important;
-  }
-
-  ion-segment-button.centered span{
-    margin-top: 1em;
-    display: block;
-  }
+  
 }

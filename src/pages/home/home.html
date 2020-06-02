@@ -1,5 +1,7 @@
 <ion-content>
-  <ion-slides pager>
+  <ion-grid>
+  
+  <ion-slides spaceBetween="-18" [slidesPerView]="3">
     <ion-slide class="imgSlide">
       <img src="assets/imgs/CAPA_1.jpg" style="height: 50vh;" />
     </ion-slide>
@@ -10,6 +12,26 @@
       <img src="assets/imgs/CAPA_3.jpg" style="height: 50vh;" />
     </ion-slide>
   </ion-slides>
+
+
+  <ion-row >
+    <ion-col col-6 >
+      <ion-card style="background-color: white; border-radius: 23px; width: calc(100% - 20px); margin: 9px;">
+        <ion-card-content>
+
+        </ion-card-content>
+      </ion-card>      
+    </ion-col>
+    <ion-col col-6 >
+      <ion-card style="background-color: white; border-radius: 23px; width: calc(100% - 20px); margin: 9px;">
+        <ion-card-content>
+
+        </ion-card-content>
+      </ion-card>      
+    </ion-col>
+  </ion-row>    
+
+
 </ion-content>
 
 
