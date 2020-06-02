@@ -5,8 +5,6 @@ import { Bilhete } from '../../model/bilhete.model';
 import { Resumo } from '../../model/resumo.model';
 import { MeuCaixaService } from '../../service/meu-caixa.service';
 import { UsuarioService } from '../../service/usuario.service';
-import { CaixaCambistaPage } from '../caixa-cambista/caixa-cambista';
-import { CaixaGerentePage } from '../caixa-gerente/caixa-gerente';
 import { ID_BANCA } from '../../service/app.api';
 
 @IonicPage()
@@ -107,27 +105,7 @@ export class CaixaPage {
     })
   }
 
-  detalhaGerente(resumo : Resumo){
-    let modal = this.modalCtrl.create(CaixaGerentePage, {
-      resumoGerente: resumo
-    });
-    modal.present();
-  }
 
-  detalhaCambista(resumo : Resumo){
-    let modal = this.modalCtrl.create(CaixaCambistaPage, {
-      resumoCambista: resumo
-    });
-    modal.present();
-  }
-
-  detalhaPremiacoes(resumo: Resumo){
-    let modal = this.modalCtrl.create(CaixaCambistaPage, {
-      isPremiacoes: true,
-      resumo: resumo
-    });
-    modal.present();
-  }
 
   detalhaSaldo(){
     if(this.tipo == 0){

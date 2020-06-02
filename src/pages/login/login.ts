@@ -9,7 +9,6 @@ import { Storage } from '@ionic/storage';
 import { ID_BANCA } from '../../service/app.api'
 import { RECUPERAR_SENHA } from '../../service/app.api'
 import { Platform } from 'ionic-angular';
-import { BolaoPage } from '../bolao/bolao';
 import { BancaService } from '../../service/banca.service';
 
 @IonicPage()
@@ -95,11 +94,9 @@ export class LoginPage {
           this.versaoInvalida();
         }
       }else{
-        if(this.bancaService.banca.focoBolao && !this.bancaService.banca.focoFutebol){
-          this.navCtrl.setRoot(BolaoPage, {tipoBolao: 'ACUMULADAO'});
-        }else{
+     
           this.navCtrl.setRoot(HomePage);
-        }
+        
       }
     })
   }
@@ -120,11 +117,7 @@ export class LoginPage {
               this.storage.set('senha', sha256(this.senha));
             }
 
-            if(this.bancaService.banca.focoBolao && !this.bancaService.banca.focoFutebol){
-              this.navCtrl.setRoot(BolaoPage, {tipoBolao: 'ACUMULADAO'});
-            }else{
-              this.navCtrl.setRoot(HomePage);
-            }
+            
           } else {
             this.usuarioService.usuario = new Usuario();
             this.senha = ''
@@ -156,7 +149,7 @@ export class LoginPage {
             this.usuarioService.login(usuario).then(usuario => {
               if (usuario != undefined && usuario.id > 0 && usuario.banca.id == ID_BANCA) {
                 if(this.bancaService.banca.focoBolao && !this.bancaService.banca.focoFutebol){
-                  this.navCtrl.setRoot(BolaoPage, {tipoBolao: 'ACUMULADAO'});
+               
                 }else{
                   this.navCtrl.setRoot(HomePage);
                 }

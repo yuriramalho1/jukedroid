@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.i3esportes.simulador"
     android:hardwareAccelerated="true"
-    android:versionCode="20601"
-    android:versionName="2.6.1" >
+    android:versionCode="10001"
+    android:versionName="1.0.1" >
 
     <uses-sdk
         android:minSdkVersion="19"

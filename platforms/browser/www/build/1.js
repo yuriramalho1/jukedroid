@@ -1,1 +1,87 @@
-webpackJsonp([1],{1061:function(l,n,u){"use strict";function a(l){return _._31(0,[(l()(),_._29(-1,null,["\n"])),(l()(),_._8(1,0,null,null,10,"ion-header",[],null,null,null,null,null)),_._7(2,16384,null,0,h.a,[p.a,_.m,_.H,[2,m.a]],null,null),(l()(),_._29(-1,null,["\n\n  "])),(l()(),_._8(4,0,null,null,6,"ion-navbar",[["class","toolbar"]],[[8,"hidden",0],[2,"statusbar-padding",null]],null,null,v.b,v.a)),_._7(5,49152,null,0,P.a,[H.a,[2,m.a],[2,j.a],p.a,_.m,_.H],null,null),(l()(),_._29(-1,3,["\n    "])),(l()(),_._8(7,0,null,3,2,"ion-title",[],null,null,null,y.b,y.a)),_._7(8,49152,null,0,q.a,[p.a,_.m,_.H,[2,x.a],[2,P.a]],null,null),(l()(),_._29(-1,0,["usuarios-filtro"])),(l()(),_._29(-1,3,["\n  "])),(l()(),_._29(-1,null,["\n\n"])),(l()(),_._29(-1,null,["\n\n\n"])),(l()(),_._8(13,0,null,null,2,"ion-content",[["padding",""]],[[2,"statusbar-padding",null],[2,"has-refresher",null]],null,null,F.b,F.a)),_._7(14,4374528,null,0,M.a,[p.a,k.a,w.a,_.m,_.H,H.a,z.a,_.B,[2,m.a],[2,j.a]],null,null),(l()(),_._29(-1,1,["\n\n"])),(l()(),_._29(-1,null,["\n"]))],null,function(l,n){l(n,4,0,_._20(n,5)._hidden,_._20(n,5)._sbPadding);l(n,13,0,_._20(n,14).statusbarPadding,_._20(n,14)._hasRefresher)})}Object.defineProperty(n,"__esModule",{value:!0});var _=u(1),t=(u(0),u(4),function(){return function(l,n){this.navCtrl=l,this.navParams=n}}()),r=function(){return function(){}}(),e=u(294),i=u(295),o=u(296),s=u(297),d=u(298),c=u(299),f=u(300),b=u(301),g=u(302),h=u(21),p=u(3),m=u(7),v=u(24),P=u(17),H=u(8),j=u(13),y=u(25),q=u(22),x=u(18),F=u(23),M=u(14),k=u(6),w=u(9),z=u(16),B=u(10),C=_._6({encapsulation:2,styles:[],data:{}}),J=_._4("page-usuarios-filtro",t,function(l){return _._31(0,[(l()(),_._8(0,0,null,null,1,"page-usuarios-filtro",[],null,null,null,a,C)),_._7(1,49152,null,0,t,[j.a,B.a],null,null)],null,null)},{},{},[]),N=u(11),O=u(27),R=u(208),U=u(106);u.d(n,"UsuariosFiltroPageModuleNgFactory",function(){return A});var A=_._5(r,[],function(l){return _._16([_._17(512,_.j,_._1,[[8,[e.a,i.a,o.a,s.a,d.a,c.a,f.a,b.a,g.a,J]],[3,_.j],_.z]),_._17(4608,N.n,N.m,[_.x,[2,N.x]]),_._17(4608,O.q,O.q,[]),_._17(4608,O.d,O.d,[]),_._17(512,N.b,N.b,[]),_._17(512,O.o,O.o,[]),_._17(512,O.e,O.e,[]),_._17(512,O.m,O.m,[]),_._17(512,R.a,R.a,[]),_._17(512,R.b,R.b,[]),_._17(512,r,r,[]),_._17(256,U.a,t,[])])})}});
+webpackJsonp([1],{
+
+/***/ 975:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResumosPageModule", function() { return ResumosPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resumos__ = __webpack_require__(978);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ResumosPageModule = /** @class */ (function () {
+    function ResumosPageModule() {
+    }
+    ResumosPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__resumos__["a" /* ResumosPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__resumos__["a" /* ResumosPage */]),
+            ],
+        })
+    ], ResumosPageModule);
+    return ResumosPageModule;
+}());
+
+//# sourceMappingURL=resumos.module.js.map
+
+/***/ }),
+
+/***/ 978:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResumosPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(2);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the ResumosPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var ResumosPage = /** @class */ (function () {
+    function ResumosPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    ResumosPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ResumosPage');
+    };
+    ResumosPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-resumos',template:/*ion-inline-start:"E:\Ambiente Ionic\jukedroid\src\pages\resumos\resumos.html"*/'<!--\n  Generated template for the ResumosPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>resumos</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"E:\Ambiente Ionic\jukedroid\src\pages\resumos\resumos.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* NavParams */]])
+    ], ResumosPage);
+    return ResumosPage;
+}());
+
+//# sourceMappingURL=resumos.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=1.js.map

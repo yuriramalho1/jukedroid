@@ -43,9 +43,9 @@
     <feature name="Keyboard">
         <param name="android-package" onload="true" value="io.ionic.keyboard.IonicKeyboard" />
     </feature>
-    <name>Scobet's</name>
-    <description>Scobet's</description>
-    <author email="i3esportesbets@gmail.com" href="https://www.i3esportes.com/">Scobet's</author>
+    <name>Jukedroid</name>
+    <description>Jukedroid</description>
+    <author email="i3esportesbets@gmail.com" href="https://www.i3esportes.com/">Jukedroid</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

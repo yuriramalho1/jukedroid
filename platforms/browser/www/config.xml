@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.i3esportes.simulador" version="1.0.1" xmlns="https://www.w3.org/ns/widgets" xmlns:cdv="https://cordova.apache.org/ns/1.0">
-    <name>Scobet's</name>
-    <description>Scobet's</description>
-    <author email="i3esportesbets@gmail.com" href="https://www.i3esportes.com/">Scobet's</author>
+    <name>Jukedroid</name>
+    <description>Jukedroid</description>
+    <author email="i3esportesbets@gmail.com" href="https://www.i3esportes.com/">Jukedroid</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
